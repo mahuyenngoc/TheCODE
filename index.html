@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>The CODE – Hub</title>
+<title>The CODE</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,15 +10,34 @@
 
 <style>
 body {
-    margin:0; padding:0;
-    font-family: "Bitcount Prop Single", system-ui;
-    background:url('images/bg_home.jpg') center/cover no-repeat fixed;
-    height:100vh; display:flex;
-    justify-content:center; align-items:center;
-    flex-direction:column; color:white;
+    margin:0;
+    padding:0;
+    font-family:"Bitcount Prop Single", system-ui;
+    background:url('images/bg_home.jpg') center/cover no-repeat;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    color:white;
     text-shadow:0 0 10px black;
-    overflow:hidden;
 }
+
+/* POPUP */
+.popup {
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100vw; height:100vh;
+    background:url('images/bg_home.jpg') center/cover no-repeat;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    backdrop-filter: blur(3px);
+}
+.active { display:flex !important; }
 
 button {
     padding:12px 20px;
@@ -28,91 +47,99 @@ button {
     border:0;
     cursor:pointer;
     font-size:18px;
-    width:220px;
+    min-width:220px;
 }
 button:hover { background:#555; }
 
-/* POPUP */
-.popup {
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background:rgba(0,0,0,0.75);
-    display:none;
-    justify-content:center;
-    align-items:center;
-}
-
-.popup-content {
-    background:#000;
-    padding:30px;
-    width:350px;
-    border:1px solid #555;
-    text-align:center;
-    box-shadow:0 0 20px black;
-}
-
-.popup input {
+input {
     padding:10px;
-    width:80%;
-    margin:10px 0;
-    background:#111;
+    background:#000;
     border:1px solid #444;
-    color:white;
+    color:#fff;
+    width:250px;
+    margin-bottom:10px;
+    font-size:1.2em;
     text-align:center;
 }
-
 </style>
 </head>
 
 <body>
+
+<!-- HOME -->
+<div id="home" class="popup active">
+    <h1 style="font-size:4em;">The CODE</h1>
+    <p style="font-size:20px;">Welcome back, Decoder.</p>
+    <button onclick="openPopup('hub')">Tiến hành vụ án</button>
+</div>
+
+<!-- HUB -->
+<div id="hub" class="popup">
     <h1 style="font-size:3em;">Case Hub</h1>
     <p>Chọn Case muốn thực hiện:</p>
 
-    <button onclick="openCase(1)">Case 1</button>
-    <button onclick="openCase(2)">Case 2</button>
-    <button onclick="openCase(3)">Case 3</button>
+    <button onclick="openPopup('case1')">Case 1</button>
+    <button onclick="openPopup('case2')">Case 2</button>
+    <button onclick="openPopup('case3')">Case 3</button>
 
-    <button onclick="location.href='index.html'">Quay lại Trang chủ</button>
+    <button onclick="openPopup('home')">Quay lại Trang chủ</button>
+</div>
 
-<!-- POPUP -->
-<div id="popup" class="popup">
-    <div class="popup-content">
-        <h2 id="caseTitle"></h2>
-        <p>Mã liên lạc:</p>
-        <input id="caseInput">
-        <p id="result"></p>
+<!-- CASE 1 -->
+<div id="case1" class="popup">
+    <h1 style="font-size:3em;">Case 1</h1>
+    <p>Mã liên lạc:</p>
 
-        <button onclick="check()">Xác nhận</button>
-        <button onclick="closePopup()">Đóng</button>
-    </div>
+    <input id="code1">
+    <button onclick="check(1)">Xác nhận</button>
+    <p id="result1"></p>
+
+    <button onclick="openPopup('hub')">Quay lại Hub</button>
+</div>
+
+<!-- CASE 2 -->
+<div id="case2" class="popup">
+    <h1 style="font-size:3em;">Case 2</h1>
+    <p>Mã liên lạc:</p>
+
+    <input id="code2">
+    <button onclick="check(2)">Xác nhận</button>
+    <p id="result2"></p>
+
+    <button onclick="openPopup('hub')">Quay lại Hub</button>
+</div>
+
+<!-- CASE 3 -->
+<div id="case3" class="popup">
+    <h1 style="font-size:3em;">Case 3</h1>
+    <p>Mã liên lạc:</p>
+
+    <input id="code3">
+    <button onclick="check(3)">Xác nhận</button>
+    <p id="result3"></p>
+
+    <button onclick="openPopup('hub')">Quay lại Hub</button>
 </div>
 
 <script>
-let currentCase = 0;
-
-function openCase(n){
-    currentCase = n;
-    document.getElementById("caseTitle").innerText = "Case " + n;
-    document.getElementById("caseInput").value = "";
-    document.getElementById("result").innerText = "";
-    document.getElementById("popup").style.display = "flex";
+function openPopup(id){
+    document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
 }
 
-function closePopup(){
-    document.getElementById("popup").style.display = "none";
-}
+function check(n){
+    let input = document.getElementById("code"+n).value;
+    let result = document.getElementById("result"+n);
 
-function check(){
-    const v = document.getElementById("caseInput").value;
-    const correct = {
-        1: "111",
-        2: "222",
-        3: "333"
-    };
-
-    document.getElementById("result").innerText =
-        v === correct[currentCase] ? "Code đúng!" : "Sai mã";
+    if(
+        (n===1 && input==="111") ||
+        (n===2 && input==="222") ||
+        (n===3 && input==="333")
+    ){
+        result.innerText = "Code đúng!";
+    } else {
+        result.innerText = "Sai mã";
+    }
 }
 </script>
 
