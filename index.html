@@ -40,6 +40,13 @@ body {
     background:rgba(0,0,0,0.4);
     backdrop-filter:blur(2px);
     z-index:10;
+
+    opacity:0;
+    transition:opacity .3s ease;
+}
+
+#overlay.show {
+    opacity:1;
 }
 
 /* POPUP PAGE */
@@ -47,8 +54,7 @@ body {
     display:none;
     position:fixed;
     top:50%; left:50%;
-    transform:translate(-50%, -50%);
-
+    transform:translate(-50%, -40%);
     width:80vw;
     max-width:500px;
 
@@ -63,10 +69,18 @@ body {
 
     color:white;
     text-align:center;
+
+    opacity:0;
+    transition:opacity .35s ease, transform .35s ease;
 }
 
 .page.active {
     display:block !important;
+}
+
+.page.show {
+    opacity:1;
+    transform:translate(-50%, -50%);
 }
 
 /* BUTTON */
@@ -155,14 +169,30 @@ input {
 
 <script>
 function closePage(){
-    document.getElementById("overlay").style.display="none";
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    const ov = document.getElementById("overlay");
+    ov.classList.remove("show");
+
+    document.querySelectorAll(".page").forEach(p => {
+        p.classList.remove("show");
+        p.classList.remove("active");
+    });
+
+    setTimeout(()=> ov.style.display="none", 300);
 }
 
 function openPage(id){
     closePage();
-    document.getElementById("overlay").style.display="block";
-    document.getElementById(id).classList.add("active");
+
+    const ov = document.getElementById("overlay");
+    const pg = document.getElementById(id);
+
+    ov.style.display="block";
+
+    setTimeout(()=> ov.classList.add("show"), 10);
+
+    pg.classList.add("active");
+
+    setTimeout(()=> pg.classList.add("show"), 20);
 }
 
 function check(n){
@@ -183,4 +213,3 @@ function check(n){
 
 </body>
 </html>
-
