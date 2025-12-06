@@ -15,30 +15,29 @@ body {
     font-family:"Bitcount Prop Single", system-ui;
     background:url('images/bg_home.jpg') center/cover no-repeat fixed;
     height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    color:white;
-    text-shadow:0 0 10px black;
     overflow:hidden;
 }
 
-/* PAGE (no more slideshow) */
-.popup {
+/* ----- PAGE SYSTEM (Không slide, không đè, không lỗi) ----- */
+.page {
     display:none;
     position:fixed;
     top:0; left:0;
     width:100vw; height:100vh;
     background:url('images/bg_home.jpg') center/cover no-repeat;
+    backdrop-filter: blur(3px);
+
+    display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    text-align:center;
+
     color:white;
-    backdrop-filter: blur(3px);
+    text-shadow:0 0 10px black;
 }
 
-.active {
+.page.active {
     display:flex !important;
 }
 
@@ -69,7 +68,7 @@ input {
 
 <body>
 
-<!-- HOME -->
+<!-- HOME PAGE -->
 <div id="home" class="page active">
     <h1 style="font-size:4em;">The CODE</h1>
     <p style="font-size:20px;">Welcome back, Decoder.</p>
@@ -134,7 +133,7 @@ function check(n){
     let input = document.getElementById("code"+n).value;
     let result = document.getElementById("result"+n);
 
-    if(
+    if (
         (n===1 && input==="111") ||
         (n===2 && input==="222") ||
         (n===3 && input==="333")
