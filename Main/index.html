@@ -275,18 +275,18 @@ function openPage(id){
 /* ===== CODE ROUTING SYSTEM (UPDATED) ===== */
 /* 4 code chính mới */
 const codes = {
-    A: "AAAA",
-    B: "BBBB",
-    C: "CCCC",
-    D: "DDDD"
+    C: "CWTS1",
+    O: "BBBB",
+    D: "DJR04",
+    E: "END12"
 };
 
 /* Trả về nhóm code dựa trên input */
 function detectCode(val){
-    if(val === codes.A) return "A";
-    if(val === codes.B) return "B";
     if(val === codes.C) return "C";
+    if(val === codes.O) return "O";
     if(val === codes.D) return "D";
+    if(val === codes.E) return "E";
     return null;
 }
 
