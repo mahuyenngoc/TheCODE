@@ -5,22 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The CODE</title>
 <style>
-  /* BODY + BG */
+  /* BODY */
   body {
     margin:0; padding:0;
-    background:url('bg_home.jpg') no-repeat center center fixed;
-    background-size:cover;
     font-family: Arial, sans-serif;
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    overflow:hidden;
+  }
+
+  /* NỀN */
+  #bg {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:url('bg_home.jpg') no-repeat center center;
+    background-size:cover;
+    z-index:-1;
   }
 
   /* POPUP */
   .popup {
     display:none;
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.85);
     padding:40px;
     text-align:center;
     border-radius:15px;
@@ -59,6 +68,9 @@
 </style>
 </head>
 <body>
+
+<!-- NỀN -->
+<div id="bg"></div>
 
 <!-- HOME -->
 <div id="home" class="popup active">
@@ -118,7 +130,6 @@ function showPopup(id){
 function checkCode(inputId){
   const val = document.getElementById(inputId).value;
   let result = document.getElementById('result'+inputId.replace('code',''));
-  // Demo code check
   if(val === '123'){ 
     result.innerText = "Mã hợp lệ!";
   } else {
@@ -129,4 +140,3 @@ function checkCode(inputId){
 
 </body>
 </html>
-
