@@ -29,6 +29,10 @@ body {
     left:50%;
     transform:translate(-50%, -50%);
     text-align:center;
+
+    /* --- HIỆU ỨNG FADE-IN --- */
+    opacity:0;
+    animation: fadeIn 1.2s ease forwards;
 }
 
 /* OVERLAY */
@@ -41,12 +45,7 @@ body {
     backdrop-filter:blur(2px);
     z-index:10;
 
-    opacity:0;
-    transition:opacity .3s ease;
-}
-
-#overlay.show {
-    opacity:1;
+    animation: fadeIn 0.4s ease forwards;
 }
 
 /* POPUP PAGE */
@@ -54,33 +53,31 @@ body {
     display:none;
     position:fixed;
     top:50%; left:50%;
-    transform:translate(-50%, -40%);
+    transform:translate(-50%, -50%);
     width:80vw;
     max-width:500px;
-
     background:rgba(0,0,0,0.6);
     backdrop-filter:blur(8px);
     border-radius:10px;
     border:1px solid #777;
     padding:30px;
 
-    box-shadow:0 0 30px black;
+    box-shadow:0 0 25px rgba(255,255,255,0.15);
     z-index:20;
-
     color:white;
     text-align:center;
 
+    /* start hidden */
     opacity:0;
-    transition:opacity .35s ease, transform .35s ease;
+    scale:0.9;
+    transition:0.35s ease;
 }
 
+/* POPUP ACTIVE ANIMATION */
 .page.active {
     display:block !important;
-}
-
-.page.show {
     opacity:1;
-    transform:translate(-50%, -50%);
+    scale:1;
 }
 
 /* BUTTON */
@@ -94,8 +91,17 @@ button {
     color:white;
     font-size:18px;
     min-width:180px;
+    transition:0.25s ease;
+
+    /* GLOW NHẸ */
+    box-shadow:0 0 6px rgba(255,255,255,0.15);
 }
-button:hover { background:#444; }
+
+/* BUTTON HOVER */
+button:hover { 
+    background:#333;
+    box-shadow:0 0 12px rgba(255,255,255,0.35);
+}
 
 /* INPUT */
 input {
@@ -106,6 +112,15 @@ input {
     width:240px;
     font-size:1.1em;
     margin-top:10px;
+
+    /* glow input */
+    box-shadow:0 0 10px rgba(255,255,255,0.1) inset;
+}
+
+/* KEYFRAMES */
+@keyframes fadeIn {
+    from { opacity:0; transform:translate(-50%, -55%); }
+    to   { opacity:1; transform:translate(-50%, -50%); }
 }
 </style>
 </head>
@@ -169,30 +184,14 @@ input {
 
 <script>
 function closePage(){
-    const ov = document.getElementById("overlay");
-    ov.classList.remove("show");
-
-    document.querySelectorAll(".page").forEach(p => {
-        p.classList.remove("show");
-        p.classList.remove("active");
-    });
-
-    setTimeout(()=> ov.style.display="none", 300);
+    document.getElementById("overlay").style.display="none";
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
 }
 
 function openPage(id){
     closePage();
-
-    const ov = document.getElementById("overlay");
-    const pg = document.getElementById(id);
-
-    ov.style.display="block";
-
-    setTimeout(()=> ov.classList.add("show"), 10);
-
-    pg.classList.add("active");
-
-    setTimeout(()=> pg.classList.add("show"), 20);
+    document.getElementById("overlay").style.display="block";
+    document.getElementById(id).classList.add("active");
 }
 
 function check(n){
