@@ -4,67 +4,75 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The CODE</title>
+
+<!-- FONT -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
+
 <style>
-  /* BODY */
-  body {
-    margin:0; padding:0;
-    font-family: Arial, sans-serif;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-  }
+/* FONT TOÀN TRANG */
+body, html {
+  margin:0; padding:0;
+  height:100%;
+  font-family: 'Bitcount Prop Single', system-ui;
+  background: none; /* sẽ dùng div #bg */
+  color:#000; /* chữ ngoài ô đen */
+}
 
-  /* NỀN */
-  #bg {
-    position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background:url('bg_home.jpg') no-repeat center center;
-    background-size:cover;
-    z-index:-1;
-  }
+/* NỀN */
+#bg {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1;
+  background-image: url('bg_home.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-  /* POPUP */
-  .popup {
-    display:none;
-    background: rgba(255,255,255,0.85);
-    padding:40px;
-    text-align:center;
-    border-radius:15px;
-    width:80%;
-    max-width:500px;
-    box-shadow:0 0 20px rgba(0,0,0,0.5);
-  }
-  .popup.active { display:block; }
+/* POPUP */
+.popup {
+  display:none;
+  position: fixed;
+  top:50%; left:50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.85);
+  padding:40px;
+  border-radius:15px;
+  text-align:center;
+  width:80%;
+  max-width:500px;
+}
 
-  h1 { font-size:36px; margin-bottom:20px; }
-  h2 { font-size:20px; margin-bottom:20px; color:#333; }
+/* HIỂN THỊ POPUP ACTIVE */
+.popup.active { display:block; }
 
-  input[type="text"] {
-    width:80%;
-    padding:10px;
-    font-size:16px;
-    margin-bottom:15px;
-    color:#fff;
-    background:#000;
-    border:none;
-    border-radius:5px;
-  }
+/* TIÊU ĐỀ TO */
+.popup h1 { font-size:2.5em; margin-bottom:20px; }
 
-  button {
-    padding:10px 20px;
-    margin-top:10px;
-    cursor:pointer;
-    border:none;
-    border-radius:5px;
-    background:#222;
-    color:#eee;
-    font-size:16px;
-  }
+/* BUTTON */
+button {
+  padding:10px 18px;
+  margin:10px 0;
+  cursor:pointer;
+  border:0;
+  background:#222;
+  color:#fff;
+  width:200px;
+}
 
-  p { color:#000; }
+/* INPUT */
+input {
+  padding:8px;
+  background:#111;
+  border:1px solid #444;
+  color:#fff;
+  width:200px;
+  margin-bottom:10px;
+  text-align:center;
+}
 </style>
 </head>
 <body>
@@ -72,68 +80,74 @@
 <!-- NỀN -->
 <div id="bg"></div>
 
-<!-- HOME -->
+<!-- TRANG CHỦ -->
 <div id="home" class="popup active">
   <h1>The CODE</h1>
-  <p>Welcome back, Decoder.</p>
-  <button onclick="showPopup('hub')">Tiến hành vụ án</button>
+  <p style="font-size:18px;">Welcome back, Decoder.</p>
+  <button onclick="go('hub')">Tiến hành vụ án</button>
 </div>
 
-<!-- HUB -->
+<!-- HUB: 3 CASE -->
 <div id="hub" class="popup">
   <h1>Case Hub</h1>
   <p>Chọn Case muốn thực hiện:</p>
-  <button onclick="showPopup('case1')">Case 1</button>
-  <button onclick="showPopup('case2')">Case 2</button>
-  <button onclick="showPopup('case3')">Case 3</button>
+  <button onclick="go('case1')">Case 1</button>
+  <button onclick="go('case2')">Case 2</button>
+  <button onclick="go('case3')">Case 3</button>
+  <button onclick="go('home')">Quay lại Trang chủ</button>
 </div>
 
 <!-- CASE 1 -->
 <div id="case1" class="popup">
   <h1>Case 1</h1>
-  <h2>LIÊN HỆ TRỢ GIÚP</h2>
-  <input type="text" id="code1" placeholder="Mã liên lạc">
-  <br>
-  <button onclick="checkCode('code1')">Xác nhận</button>
-  <p id="result1"></p>
-  <button onclick="showPopup('hub')">Quay lại Hub</button>
+  <p>Liên hệ trợ giúp, Mã liên lạc:</p>
+  <input id="codeInput1" placeholder="Nhập code Case 1">
+  <button onclick="checkCode('codeInput1')">Xác nhận</button>
+  <p id="codeResult1"></p>
+  <button onclick="go('hub')">Quay lại Hub</button>
 </div>
 
 <!-- CASE 2 -->
 <div id="case2" class="popup">
   <h1>Case 2</h1>
-  <h2>LIÊN HỆ TRỢ GIÚP</h2>
-  <input type="text" id="code2" placeholder="Mã liên lạc">
-  <br>
-  <button onclick="checkCode('code2')">Xác nhận</button>
-  <p id="result2"></p>
-  <button onclick="showPopup('hub')">Quay lại Hub</button>
+  <p>Liên hệ trợ giúp, Mã liên lạc:</p>
+  <input id="codeInput2" placeholder="Nhập code Case 2">
+  <button onclick="checkCode('codeInput2')">Xác nhận</button>
+  <p id="codeResult2"></p>
+  <button onclick="go('hub')">Quay lại Hub</button>
 </div>
 
 <!-- CASE 3 -->
 <div id="case3" class="popup">
   <h1>Case 3</h1>
-  <h2>LIÊN HỆ TRỢ GIÚP</h2>
-  <input type="text" id="code3" placeholder="Mã liên lạc">
-  <br>
-  <button onclick="checkCode('code3')">Xác nhận</button>
-  <p id="result3"></p>
-  <button onclick="showPopup('hub')">Quay lại Hub</button>
+  <p>Liên hệ trợ giúp, Mã liên lạc:</p>
+  <input id="codeInput3" placeholder="Nhập code Case 3">
+  <button onclick="checkCode('codeInput3')">Xác nhận</button>
+  <p id="codeResult3"></p>
+  <button onclick="go('hub')">Quay lại Hub</button>
 </div>
 
 <script>
-function showPopup(id){
+// Chuyển popup
+function go(id){
   document.querySelectorAll('.popup').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
+// Kiểm tra code
+let codes = {
+  "111": "Case 1 code đúng!",
+  "222": "Case 2 code đúng!",
+  "333": "Case 3 code đúng!"
+};
+
 function checkCode(inputId){
   const val = document.getElementById(inputId).value;
-  let result = document.getElementById('result'+inputId.replace('code',''));
-  if(val === '123'){ 
-    result.innerText = "Mã hợp lệ!";
+  let resultId = inputId.replace('Input','Result');
+  if(codes[val]){
+    document.getElementById(resultId).innerText = codes[val];
   } else {
-    result.innerText = "Sai mã!";
+    document.getElementById(resultId).innerText = "Sai mã";
   }
 }
 </script>
