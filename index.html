@@ -11,19 +11,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
 
 <style>
-/* ----- CHUNG ----- */
 body {
     margin:0;
     padding:0;
     font-family: "Bitcount Prop Single", system-ui;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings: "slnt" 0, "CRSV" 0.5, "ELSH" 0, "ELXP" 0;
 }
 
-/* ----- SCREEN ----- */
-.screen {
+/* ----- SCREEN / POPUP ----- */
+.popup {
     display:none;
     width:100vw;
     height:100vh;
@@ -39,7 +34,8 @@ body {
     padding:20px;
     box-sizing:border-box;
 }
-.active { display:flex; }
+
+.popup.active { display:flex; }
 
 h1 { font-size:4em; margin-bottom:0.2em; }
 p { font-size:1.5em; margin:0.5em 0; }
@@ -69,7 +65,10 @@ button:hover { background:#555; }
 
 img { max-width:80%; height:auto; margin:20px 0; }
 
-.case-buttons { display:flex; flex-direction:column; gap:10px; }
+</style>
+</head>
+
+<body>
 
 <!-- NỀN -->
 <div id="bg"></div>
@@ -81,7 +80,7 @@ img { max-width:80%; height:auto; margin:20px 0; }
   <button onclick="go('hub')">Tiến hành vụ án</button>
 </div>
 
-<!-- HUB: 3 CASE -->
+<!-- HUB -->
 <div id="hub" class="popup">
   <h1>Case Hub</h1>
   <p>Chọn Case muốn thực hiện:</p>
@@ -148,5 +147,3 @@ function checkCode(inputId){
 
 </body>
 </html>
-
-    
