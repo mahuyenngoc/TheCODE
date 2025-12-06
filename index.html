@@ -242,21 +242,20 @@ body::after {
 <audio id="clickSound" src="sounds/click.mp3" preload="auto"></audio>
 
 <script>
-/* Play click sound */
+/* CLICK SOUND */
 function playClick(){
     const s = document.getElementById('clickSound');
     if(!s) return;
     try{
         s.currentTime = 0;
         s.play();
-    }catch(e){ /* ignore autoplay errors */ }
+    }catch(e){}
 }
 
-/* overlay open/close logic (keeps overlay persistent, full-screen) */
+/* OPEN/CLOSE PAGES */
 function closePage(){
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
     document.getElementById("overlay").classList.remove("active");
-    // accessibility
     document.getElementById('home').setAttribute('aria-hidden','false');
 }
 
@@ -264,44 +263,92 @@ function openPage(id){
     document.getElementById("overlay").classList.add("active");
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
     const target = document.getElementById(id);
+
     target.classList.add("active");
-    // accessibility
     document.getElementById('home').setAttribute('aria-hidden','true');
     target.setAttribute('aria-hidden','false');
-    // autofocus input if present
+
     const input = target.querySelector('input');
-    if(input) setTimeout(()=> input.focus(), 220);
+    if(input) setTimeout(()=> input.focus(), 250);
 }
 
-/* check code logic */
+/* ===== CODE ROUTING SYSTEM ===== */
+/* 4 code tổng */
+const codes = {
+    A: "AX01",
+    B: "BX02",
+    C: "CX03",
+    D: "DX04"
+};
+
+function detectCode(val){
+    if(val === codes.A) return "A";
+    if(val === codes.B) return "B";
+    if(val === codes.C) return "C";
+    if(val === codes.D) return "D";
+    return null;
+}
+
+/* CHECK INPUT */
 function check(n){
-    const val = document.getElementById('c'+n).value.trim();
+    const inp = document.getElementById('c'+n);
+    const val = inp.value.trim();
     const out = document.getElementById('r'+n);
+
     if(!val){
-        out.innerText = "Chưa nhập mã.";
+        out.innerText = "No ID entered.";
+        out.style.color = "#ff4d4d";
         return;
     }
 
-    if(
-        (n===1 && val==="111") ||
-        (n===2 && val==="222") ||
-        (n===3 && val==="333")
-    ){
-        out.innerText = "Code đúng!";
-    } else {
-        out.innerText = "Sai mã.";
-        // small shake effect
-        const inp = document.getElementById('c'+n);
+    /* xác định code thuộc nhóm nào */
+    const key = detectCode(val);
+
+    if(!key){
+        // WRONG
+        out.innerText = "Error";
+        out.style.color = "#ff4d4d";
+
+        inp.style.border = "2px solid #ff4d4d";
+        inp.style.boxShadow = "0 0 12px #ff4d4d55 inset";
+
         inp.classList.add('shake');
-        setTimeout(()=> inp.classList.remove('shake'), 300);
+        setTimeout(()=>{
+            inp.classList.remove('shake');
+            inp.style.border = "";
+            inp.style.boxShadow = "";
+        }, 400);
+        return;
     }
+
+    // CORRECT
+    out.innerText = "Access successfully";
+    out.style.color = "#4dff88";
+
+    inp.style.border = "2px solid #4dff88";
+    inp.style.boxShadow = "0 0 12px #4dff8855 inset";
+
+    // 600ms delay → chuyển trang
+    setTimeout(()=>{
+        window.location.href = `/case${n}_${key}.html`;
+    }, 600);
 }
 
-/* small shake CSS injection so we don't rewrite big CSS block */
+/* SHAKE EFFECT */
 const shakeStyle = document.createElement('style');
-shakeStyle.innerHTML = `@keyframes shake {0%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}100%{transform:translateX(0)}} .shake{animation:shake .32s linear}`;
+shakeStyle.innerHTML = `
+@keyframes shake {
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-6px)}
+    50%{transform:translateX(6px)}
+    75%{transform:translateX(-4px)}
+    100%{transform:translateX(0)}
+}
+.shake { animation: shake .32s linear; }
+`;
 document.head.appendChild(shakeStyle);
 </script>
+
 
 </body>
 </html>
