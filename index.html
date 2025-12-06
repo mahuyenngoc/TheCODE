@@ -4,41 +4,27 @@
 <meta charset="UTF-8">
 <title>The CODE</title>
 
-<!-- FONT -->
+<!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Primary (buttons / body / inputs) -->
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
+<!-- Title font (changeable) -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
 /* NỀN CHÍNH */
 body {
     margin:0;
     padding:0;
-    font-family:"Bitcount Prop Single", system-ui;
+    /* body dùng Bitcount (the font you wanted) */
+    font-family:"Bitcount Prop Single", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     background:url('images/bg_home.jpg') center/cover no-repeat fixed;
     height:100vh;
     overflow:hidden;
     color:white;
     text-align:center;
     position:relative;
-}
-
-/* ============================
-   🟦 SCANLINE / CRT EFFECT
-   ============================ */
-body::after {
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.03) 0px,
-        rgba(255,255,255,0.03) 1px,
-        transparent 2px
-    );
-    z-index:5;
-    mix-blend-mode:overlay;
 }
 
 /* HOME PAGE */
@@ -48,115 +34,83 @@ body::after {
     left:50%;
     transform:translate(-50%, -50%);
     text-align:center;
-
     opacity:0;
     animation: fadeIn 1.2s ease forwards;
 }
 
-/* ============================
-   🟦 Typing effect
-   ============================ */
+/* TITLE: uppercase, big, different font (Montserrat) */
+.title-main {
+    font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    font-weight:900;
+    letter-spacing:2px;
+    font-size:5rem; /* very large */
+    margin:0 0 6px 0;
+    text-transform:uppercase;
+}
+
+/* Typing line uses Bitcount but remains centered */
 .typewriter {
-    width:0;
+    display:inline-block;
     overflow:hidden;
     white-space:nowrap;
     border-right:2px solid rgba(255,255,255,0.6);
     animation:
-        typing 2.5s steps(30) forwards,
+        typing 2.6s steps(40) forwards,
         blink .7s step-end infinite;
+    font-size:20px;
+    margin-top:6px;
+    font-family:"Bitcount Prop Single", system-ui;
 }
 
-@keyframes typing {
-    from { width:0 }
-    to   { width:260px }
-}
+/* Typing keyframes */
+@keyframes typing { from { width:0 } to { width:320px } }
+@keyframes blink { 50% { border-color:transparent; } }
 
-@keyframes blink {
-    50% { border-color:transparent; }
-}
-
-/* ============================
-   OVERLAY (full & persistent)
-   ============================ */
+/* OVERLAY (full & persistent) */
 #overlay {
     position:fixed;
     inset:0;
     background:rgba(0,0,0,0.4);
     backdrop-filter:blur(2px);
     z-index:10;
-
     opacity:0;
     pointer-events:none;
-
     transition:opacity .35s ease;
 }
+#overlay.active { opacity:1; pointer-events:auto; }
 
-#overlay.active {
-    opacity:1;
-    pointer-events:auto;
-}
-
-/* ============================
-   POPUP PAGE
-   ============================ */
+/* POPUP PAGE */
 .page {
     display:none;
     position:fixed;
     top:50%; left:50%;
     transform:translate(-50%, -50%);
     width:80vw;
-    max-width:500px;
+    max-width:520px;
     background:rgba(0,0,0,0.55);
     backdrop-filter:blur(8px);
-
-    border-radius:10px;
-    border:1px solid rgba(0,255,255,0.4);
-
-    padding:30px;
+    border-radius:12px;
+    border:1px solid rgba(0,255,255,0.12);
+    padding:34px;
+    box-shadow:0 0 30px rgba(0,0,0,0.6);
     z-index:20;
     color:white;
     text-align:center;
-
     opacity:0;
-    scale:0.9;
-    transition:0.35s ease;
-
-    /* 🟦 Hologram shimmer */
-    position:relative;
-    overflow:hidden;
+    transform-origin:center;
+    transition:opacity .34s ease, transform .34s ease;
 }
 
-.page::after {
-    content:"";
-    position:absolute;
-    top:0; left:-150%;
-    width:120%;
-    height:100%;
-    background:linear-gradient(115deg,
-        transparent,
-        rgba(0,255,255,0.12),
-        transparent
-    );
-    animation:shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-    0% { left:-150%; }
-    60% { left:150%; }
-    100% { left:150%; }
-}
-
-/* 🟦 Neon border animation */
+/* Active popup shows */
 .page.active {
     display:block !important;
     opacity:1;
-    scale:1;
-    animation: neonPulse 2s infinite alternate;
+    transform:translate(-50%, -50%) scale(1);
 }
 
-@keyframes neonPulse {
-    from { box-shadow:0 0 10px rgba(0,255,255,0.25); }
-    to   { box-shadow:0 0 25px rgba(0,255,255,0.6); }
+/* BUTTONS, INPUTS use Bitcount font explicitly */
+button, input, textarea {
+    font-family:"Bitcount Prop Single", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
 }
 
 /* BUTTON */
@@ -164,18 +118,18 @@ button {
     padding:12px 20px;
     margin:10px;
     background:#000;
-    border:1px solid #555;
+    border:1px solid #444;
     border-radius:6px;
     cursor:pointer;
     color:white;
     font-size:18px;
     min-width:180px;
-    transition:0.25s ease;
-    box-shadow:0 0 6px rgba(255,255,255,0.15);
+    transition:all .22s ease;
+    box-shadow:0 0 8px rgba(0,0,0,0.6), inset 0 0 6px rgba(255,255,255,0.03);
 }
-button:hover { 
-    background:#222;
-    box-shadow:0 0 12px rgba(0,255,255,0.45);
+button:hover {
+    background: #222;
+    box-shadow:0 6px 18px rgba(0,0,0,0.6), 0 0 18px rgba(0,255,255,0.08);
 }
 
 /* INPUT */
@@ -185,12 +139,36 @@ input {
     border:1px solid #555;
     color:white;
     width:240px;
-    font-size:1.1em;
+    font-size:1.05em;
     margin-top:10px;
-    box-shadow:0 0 10px rgba(255,255,255,0.1) inset;
+    border-radius:6px;
+    box-shadow:inset 0 0 10px rgba(0,0,0,0.6);
 }
 
-/* ANIMATION */
+/* Small responsive text sizes */
+@media (max-width:520px){
+    .title-main { font-size:3rem; }
+    .typewriter { width:220px; }
+    .page { width:90vw; padding:24px; }
+}
+
+/* subtle scanlines (kept) */
+body::after {
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.02) 0px,
+        rgba(255,255,255,0.02) 1px,
+        transparent 2px
+    );
+    z-index:5;
+    mix-blend-mode:overlay;
+}
+
+/* fade-in keyframe used for home */
 @keyframes fadeIn {
     from { opacity:0; transform:translate(-50%, -55%); }
     to   { opacity:1; transform:translate(-50%, -50%); }
@@ -202,73 +180,107 @@ input {
 
 <!-- HOME -->
 <div id="home">
-    <h1 style="font-size:4em;margin-bottom:0;">The CODE</h1>
+    <!-- Title uses Montserrat, uppercase -->
+    <h1 class="title-main">THE CODE</h1>
 
-    <!-- Typing effect -->
-    <p class="typewriter" style="font-size:20px;margin-top:6px;">
-        Welcome back, Decoder.
-    </p>
+    <!-- Typing line using Bitcount -->
+    <p><span class="typewriter">Welcome back, Decoder.</span></p>
 
-    <button onclick="openPage('hub')">Enter Hub</button>
+    <!-- Buttons call playClick then open -->
+    <button onclick="playClick(); openPage('hub')">Enter Hub</button>
 </div>
 
-<!-- NỀN MỜ -->
-<div id="overlay" onclick="closePage()"></div>
+<!-- OVERLAY -->
+<div id="overlay" onclick="playClick(); closePage()"></div>
 
 <!-- HUB -->
-<div id="hub" class="page">
-    <h1>Case Hub</h1>
-    <button onclick="openPage('case1')">Case 1</button><br>
-    <button onclick="openPage('case2')">Case 2</button><br>
-    <button onclick="openPage('case3')">Case 3</button><br>
-    <button onclick="closePage()">Close</button>
+<div id="hub" class="page" aria-hidden="true">
+    <h2 style="margin-top:0; font-weight:700;">Case Hub</h2>
+    <button onclick="playClick(); openPage('case1')">Case 1</button><br>
+    <button onclick="playClick(); openPage('case2')">Case 2</button><br>
+    <button onclick="playClick(); openPage('case3')">Case 3</button><br>
+    <button onclick="playClick(); closePage()">Close</button>
 </div>
 
 <!-- CASE 1 -->
-<div id="case1" class="page">
-    <h1>Case 1</h1>
+<div id="case1" class="page" aria-hidden="true">
+    <h2 style="margin-top:0; font-weight:700;">Case 1</h2>
     <p>Mã liên hệ Cyphers:</p>
-    <input id="c1">
-    <button onclick="check(1)">Xác nhận</button>
+    <input id="c1" placeholder="Nhập code...">
+    <div style="margin-top:10px;">
+      <button onclick="playClick(); check(1)">Xác nhận</button>
+      <button onclick="playClick(); openPage('hub')">Back</button>
+    </div>
     <p id="r1"></p>
-    <button onclick="openPage('hub')">Back to Hub</button>
 </div>
 
 <!-- CASE 2 -->
-<div id="case2" class="page">
-    <h1>Case 2</h1>
+<div id="case2" class="page" aria-hidden="true">
+    <h2 style="margin-top:0; font-weight:700;">Case 2</h2>
     <p>Mã liên hệ Cyphers:</p>
-    <input id="c2">
-    <button onclick="check(2)">Xác nhận</button>
+    <input id="c2" placeholder="Nhập code...">
+    <div style="margin-top:10px;">
+      <button onclick="playClick(); check(2)">Xác nhận</button>
+      <button onclick="playClick(); openPage('hub')">Back</button>
+    </div>
     <p id="r2"></p>
-    <button onclick="openPage('hub')">Back to Hub</button>
 </div>
 
 <!-- CASE 3 -->
-<div id="case3" class="page">
-    <h1>Case 3</h1>
+<div id="case3" class="page" aria-hidden="true">
+    <h2 style="margin-top:0; font-weight:700;">Case 3</h2>
     <p>Mã liên hệ Cyphers:</p>
-    <input id="c3">
-    <button onclick="check(3)">Xác nhận</button>
+    <input id="c3" placeholder="Nhập code...">
+    <div style="margin-top:10px;">
+      <button onclick="playClick(); check(3)">Xác nhận</button>
+      <button onclick="playClick(); openPage('hub')">Back</button>
+    </div>
     <p id="r3"></p>
-    <button onclick="openPage('hub')">Back to Hub</button>
 </div>
 
+<!-- Audio element for click sound -->
+<audio id="clickSound" src="sounds/click.mp3" preload="auto"></audio>
+
 <script>
+/* Play click sound */
+function playClick(){
+    const s = document.getElementById('clickSound');
+    if(!s) return;
+    try{
+        s.currentTime = 0;
+        s.play();
+    }catch(e){ /* ignore autoplay errors */ }
+}
+
+/* overlay open/close logic (keeps overlay persistent, full-screen) */
 function closePage(){
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
     document.getElementById("overlay").classList.remove("active");
+    // accessibility
+    document.getElementById('home').setAttribute('aria-hidden','false');
 }
 
 function openPage(id){
     document.getElementById("overlay").classList.add("active");
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+    const target = document.getElementById(id);
+    target.classList.add("active");
+    // accessibility
+    document.getElementById('home').setAttribute('aria-hidden','true');
+    target.setAttribute('aria-hidden','false');
+    // autofocus input if present
+    const input = target.querySelector('input');
+    if(input) setTimeout(()=> input.focus(), 220);
 }
 
+/* check code logic */
 function check(n){
-    let val = document.getElementById("c"+n).value;
-    let out = document.getElementById("r"+n);
+    const val = document.getElementById('c'+n).value.trim();
+    const out = document.getElementById('r'+n);
+    if(!val){
+        out.innerText = "Chưa nhập mã.";
+        return;
+    }
 
     if(
         (n===1 && val==="111") ||
@@ -278,8 +290,17 @@ function check(n){
         out.innerText = "Code đúng!";
     } else {
         out.innerText = "Sai mã.";
+        // small shake effect
+        const inp = document.getElementById('c'+n);
+        inp.classList.add('shake');
+        setTimeout(()=> inp.classList.remove('shake'), 300);
     }
 }
+
+/* small shake CSS injection so we don't rewrite big CSS block */
+const shakeStyle = document.createElement('style');
+shakeStyle.innerHTML = `@keyframes shake {0%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}100%{transform:translateX(0)}} .shake{animation:shake .32s linear}`;
+document.head.appendChild(shakeStyle);
 </script>
 
 </body>
