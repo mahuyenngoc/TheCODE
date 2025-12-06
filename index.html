@@ -11,9 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
 
 <style>
-body {
+body, html {
     margin:0;
     padding:0;
+    width:100%;
+    height:100%;
     font-family: "Bitcount Prop Single", system-ui;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -21,27 +23,35 @@ body {
     font-variation-settings: "slnt" 0, "CRSV" 0.5, "ELSH" 0, "ELXP" 0;
 }
 
-/* ----- SCREEN ----- */
 .screen {
     display:none;
-    width:100vw;
-    height:100vh;
-    background-image:url('images/bg_home.jpg');
+    width:100%;
+    height:100%;
+    background-image: url('images/bg_home.jpg');
     background-size: cover;
     background-position: center;
     color:#000;
-    display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
     padding:20px;
     box-sizing:border-box;
+    flex-direction:column;
 }
-.active { display:flex; }
 
-h1 { font-size:4em; margin-bottom:0.2em; }
-p { font-size:1.5em; margin:0.5em 0; }
+.active {
+    display:flex;
+}
+
+h1 {
+    font-size:4em;
+    margin-bottom:0.2em;
+}
+
+p {
+    font-size:1.5em;
+    margin:0.5em 0;
+}
 
 input {
     padding:10px;
@@ -53,6 +63,7 @@ input {
     font-size:1.2em;
     text-align:center;
 }
+
 button {
     padding:12px 20px;
     margin:10px 0;
@@ -60,72 +71,76 @@ button {
     border:0;
     background:#222;
     color:#eee;
-    display:block;
     font-size:1.2em;
     min-width:200px;
 }
+
 button:hover { background:#555; }
 
 img { max-width:80%; height:auto; margin:20px 0; }
 
-.case-buttons { display:flex; flex-direction:column; gap:10px; }
+.case-buttons {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
 </style>
 </head>
 <body>
 
 <!-- TRANG CHỦ -->
 <div id="home" class="screen active">
-  <h1>The CODE</h1>
-  <p>Welcome back, Decoder.</p>
-  <button onclick="go('hub')">Tiến hành vụ án</button>
+    <h1>The CODE</h1>
+    <p>Welcome back, Decoder.</p>
+    <button onclick="go('hub')">Tiến hành vụ án</button>
 </div>
 
-<!-- TRANG HUB: 3 CASE -->
+<!-- HUB PAGE -->
 <div id="hub" class="screen">
-  <h1>Case Hub</h1>
-  <p>Chọn Case muốn thực hiện:</p>
-  <div class="case-buttons">
-    <button onclick="go('case1')">Case 1</button>
-    <button onclick="go('case2')">Case 2</button>
-    <button onclick="go('case3')">Case 3</button>
-  </div>
-  <button onclick="go('home')">Quay lại Trang chủ</button>
+    <h1>Case Hub</h1>
+    <p>Chọn Case muốn thực hiện:</p>
+    <div class="case-buttons">
+        <button onclick="go('case1')">Case 1</button>
+        <button onclick="go('case2')">Case 2</button>
+        <button onclick="go('case3')">Case 3</button>
+    </div>
+    <button onclick="go('home')">Quay lại Trang chủ</button>
 </div>
 
 <!-- CASE 1 -->
 <div id="case1" class="screen">
-  <h1>Case 1</h1>
-  <p id="text1">Nội dung Case 1</p>
-  <img id="img1" src="images/case1.png" alt="Case 1">
-  <p>Nhập code để unlock slide:</p>
-  <input id="codeInput1" placeholder="Nhập code Case 1" />
-  <button onclick="checkCode('codeInput1')">Xác nhận</button>
-  <p id="codeResult1"></p>
-  <button onclick="go('hub')">Quay lại Hub</button>
+    <h1>Case 1</h1>
+    <p id="text1">Nội dung Case 1</p>
+    <img id="img1" src="images/case1.png" alt="Case 1">
+    <p>Nhập code để unlock slide:</p>
+    <input id="codeInput1" placeholder="Nhập code Case 1" />
+    <button onclick="checkCode('codeInput1')">Xác nhận</button>
+    <p id="codeResult1"></p>
+    <button onclick="go('hub')">Quay lại Hub</button>
 </div>
 
 <!-- CASE 2 -->
 <div id="case2" class="screen">
-  <h1>Case 2</h1>
-  <p id="text2">Nội dung Case 2</p>
-  <img id="img2" src="images/case2.png" alt="Case 2">
-  <p>Nhập code để unlock slide:</p>
-  <input id="codeInput2" placeholder="Nhập code Case 2" />
-  <button onclick="checkCode('codeInput2')">Xác nhận</button>
-  <p id="codeResult2"></p>
-  <button onclick="go('hub')">Quay lại Hub</button>
+    <h1>Case 2</h1>
+    <p id="text2">Nội dung Case 2</p>
+    <img id="img2" src="images/case2.png" alt="Case 2">
+    <p>Nhập code để unlock slide:</p>
+    <input id="codeInput2" placeholder="Nhập code Case 2" />
+    <button onclick="checkCode('codeInput2')">Xác nhận</button>
+    <p id="codeResult2"></p>
+    <button onclick="go('hub')">Quay lại Hub</button>
 </div>
 
 <!-- CASE 3 -->
 <div id="case3" class="screen">
-  <h1>Case 3</h1>
-  <p id="text3">Nội dung Case 3</p>
-  <img id="img3" src="images/case3.png" alt="Case 3">
-  <p>Nhập code để unlock slide:</p>
-  <input id="codeInput3" placeholder="Nhập code Case 3" />
-  <button onclick="checkCode('codeInput3')">Xác nhận</button>
-  <p id="codeResult3"></p>
-  <button onclick="go('hub')">Quay lại Hub</button>
+    <h1>Case 3</h1>
+    <p id="text3">Nội dung Case 3</p>
+    <img id="img3" src="images/case3.png" alt="Case 3">
+    <p>Nhập code để unlock slide:</p>
+    <input id="codeInput3" placeholder="Nhập code Case 3" />
+    <button onclick="checkCode('codeInput3')">Xác nhận</button>
+    <p id="codeResult3"></p>
+    <button onclick="go('hub')">Quay lại Hub</button>
 </div>
 
 <!-- SLIDES -->
@@ -137,13 +152,17 @@ img { max-width:80%; height:auto; margin:20px 0; }
 <div id="slide3B" class="screen"><h1>Slide 3B</h1><p>Nội dung Slide 3B</p></div>
 
 <script>
-// -------- PAGE SWITCH --------
 function go(id){
- document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
- document.getElementById(id).classList.add('active');
+    // Ẩn tất cả các screen
+    const screens = document.querySelectorAll('.screen');
+    screens.forEach(s => s.classList.remove('active'));
+    // Hiển thị screen hiện tại
+    const current = document.getElementById(id);
+    if(current){
+        current.classList.add('active');
+    }
 }
 
-// -------- DEFAULT DATA --------
 let data = {
  codes: {
    "111": "slide1A",
@@ -152,27 +171,18 @@ let data = {
    "222": "slide2B",
    "331": "slide3A",
    "332": "slide3B"
- },
- pages: {
-   "case1": {text:"Nội dung Case 1", img:"images/case1.png"},
-   "case2": {text:"Nội dung Case 2", img:"images/case2.png"},
-   "case3": {text:"Nội dung Case 3", img:"images/case3.png"}
  }
 };
 
-// Load saved data
-if(localStorage.adminData){ data = JSON.parse(localStorage.adminData); }
-
-// -------- CODE CHECK --------
 function checkCode(inputId){
- const val = document.getElementById(inputId).value;
- let resultId = inputId.replace('codeInput','codeResult');
- if(data.codes[val]){
-   go(data.codes[val]);
-   document.getElementById(resultId).innerText = "";
- } else {
-   document.getElementById(resultId).innerText = "Sai mã";
- }
+    const val = document.getElementById(inputId).value;
+    const resultId = inputId.replace('codeInput','codeResult');
+    if(data.codes[val]){
+        go(data.codes[val]);
+        document.getElementById(resultId).innerText = "";
+    } else {
+        document.getElementById(resultId).innerText = "Sai mã";
+    }
 }
 </script>
 </body>
