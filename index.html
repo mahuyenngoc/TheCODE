@@ -73,78 +73,71 @@ img { max-width:80%; height:auto; margin:20px 0; }
 <!-- NỀN -->
 <div id="bg"></div>
 
-<!-- TRANG CHỦ -->
+<!-- HOME -->
 <div id="home" class="popup active">
   <h1>The CODE</h1>
-  <p style="font-size:18px;">Welcome back, Decoder.</p>
-  <button onclick="go('hub')">Tiến hành vụ án</button>
+  <p>Welcome back, Decoder.</p>
+  <button onclick="showPopup('hub')">Tiến hành vụ án</button>
 </div>
 
-<!-- HUB: 3 CASE -->
+<!-- HUB -->
 <div id="hub" class="popup">
   <h1>Case Hub</h1>
   <p>Chọn Case muốn thực hiện:</p>
-  <button onclick="go('case1')">Case 1</button>
-  <button onclick="go('case2')">Case 2</button>
-  <button onclick="go('case3')">Case 3</button>
-  <button onclick="go('home')">Quay lại Trang chủ</button>
+  <button onclick="showPopup('case1')">Case 1</button>
+  <button onclick="showPopup('case2')">Case 2</button>
+  <button onclick="showPopup('case3')">Case 3</button>
 </div>
 
 <!-- CASE 1 -->
 <div id="case1" class="popup">
   <h1>Case 1</h1>
-  <p>Liên hệ trợ giúp, Mã liên lạc:</p>
-  <input id="codeInput1" placeholder="Nhập code Case 1">
-  <button onclick="checkCode('codeInput1')">Xác nhận</button>
-  <p id="codeResult1"></p>
-  <button onclick="go('hub')">Quay lại Hub</button>
+  <h2>LIÊN HỆ TRỢ GIÚP</h2>
+  <input type="text" id="code1" placeholder="Mã liên lạc">
+  <br>
+  <button onclick="checkCode('code1')">Xác nhận</button>
+  <p id="result1"></p>
+  <button onclick="showPopup('hub')">Quay lại Hub</button>
 </div>
 
 <!-- CASE 2 -->
 <div id="case2" class="popup">
   <h1>Case 2</h1>
-  <p>Liên hệ trợ giúp, Mã liên lạc:</p>
-  <input id="codeInput2" placeholder="Nhập code Case 2">
-  <button onclick="checkCode('codeInput2')">Xác nhận</button>
-  <p id="codeResult2"></p>
-  <button onclick="go('hub')">Quay lại Hub</button>
+  <h2>LIÊN HỆ TRỢ GIÚP</h2>
+  <input type="text" id="code2" placeholder="Mã liên lạc">
+  <br>
+  <button onclick="checkCode('code2')">Xác nhận</button>
+  <p id="result2"></p>
+  <button onclick="showPopup('hub')">Quay lại Hub</button>
 </div>
 
 <!-- CASE 3 -->
 <div id="case3" class="popup">
   <h1>Case 3</h1>
-  <p>Liên hệ trợ giúp, Mã liên lạc:</p>
-  <input id="codeInput3" placeholder="Nhập code Case 3">
-  <button onclick="checkCode('codeInput3')">Xác nhận</button>
-  <p id="codeResult3"></p>
-  <button onclick="go('hub')">Quay lại Hub</button>
+  <h2>LIÊN HỆ TRỢ GIÚP</h2>
+  <input type="text" id="code3" placeholder="Mã liên lạc">
+  <br>
+  <button onclick="checkCode('code3')">Xác nhận</button>
+  <p id="result3"></p>
+  <button onclick="showPopup('hub')">Quay lại Hub</button>
 </div>
 
 <script>
-// Chuyển popup
-function go(id){
+function showPopup(id){
   document.querySelectorAll('.popup').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-// Kiểm tra code
-let codes = {
-  "111": "Case 1 code đúng!",
-  "222": "Case 2 code đúng!",
-  "333": "Case 3 code đúng!"
-};
-
 function checkCode(inputId){
   const val = document.getElementById(inputId).value;
-  let resultId = inputId.replace('Input','Result');
-  if(codes[val]){
-    document.getElementById(resultId).innerText = codes[val];
+  let result = document.getElementById('result'+inputId.replace('code',''));
+  if(val === '123'){ 
+    result.innerText = "Mã hợp lệ!";
   } else {
-    document.getElementById(resultId).innerText = "Sai mã";
+    result.innerText = "Sai mã!";
   }
 }
 </script>
 
 </body>
 </html>
-
