@@ -9,14 +9,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Primary (buttons / body / inputs) -->
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
-<!-- Title font (Roboto Mono) -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet">
+<!-- Title font (changeable) -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
 /* NỀN CHÍNH */
 body {
     margin:0;
     padding:0;
+    /* body dùng Bitcount (the font you wanted) */
     font-family:"Bitcount Prop Single", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     background:url('images/bg_home.jpg') center/cover no-repeat fixed;
     height:100vh;
@@ -37,17 +38,17 @@ body {
     animation: fadeIn 1.2s ease forwards;
 }
 
-/* TITLE: use Roboto Mono */
+/* TITLE: uppercase, big, different font (Montserrat) */
 .title-main {
-    font-family: "Roboto Mono", monospace;
-    font-weight:700;
+    font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    font-weight:900;
     letter-spacing:2px;
-    font-size:5rem;
+    font-size:5rem; /* very large */
     margin:0 0 6px 0;
     text-transform:uppercase;
 }
 
-/* Typing line */
+/* Typing line uses Bitcount but remains centered */
 .typewriter {
     display:inline-block;
     overflow:hidden;
@@ -61,11 +62,11 @@ body {
     font-family:"Bitcount Prop Single", system-ui;
 }
 
-/* KEYFRAMES */
+/* Typing keyframes */
 @keyframes typing { from { width:0 } to { width:320px } }
 @keyframes blink { 50% { border-color:transparent; } }
 
-/* OVERLAY */
+/* OVERLAY (full & persistent) */
 #overlay {
     position:fixed;
     inset:0;
@@ -78,7 +79,7 @@ body {
 }
 #overlay.active { opacity:1; pointer-events:auto; }
 
-/* POPUP */
+/* POPUP PAGE */
 .page {
     display:none;
     position:fixed;
@@ -100,15 +101,20 @@ body {
     transition:opacity .34s ease, transform .34s ease;
 }
 
+/* Active popup shows */
 .page.active {
     display:block !important;
     opacity:1;
     transform:translate(-50%, -50%) scale(1);
 }
 
-/* BUTTONS use Roboto Mono */
+/* BUTTONS, INPUTS use Bitcount font explicitly */
+button, input, textarea {
+    font-family:"Bitcount Prop Single", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}
+
+/* BUTTON */
 button {
-    font-family:"Roboto Mono", monospace;
     padding:12px 20px;
     margin:10px;
     background:#000;
@@ -139,12 +145,14 @@ input {
     box-shadow:inset 0 0 10px rgba(0,0,0,0.6);
 }
 
+/* Small responsive text sizes */
 @media (max-width:520px){
     .title-main { font-size:3rem; }
     .typewriter { width:220px; }
     .page { width:90vw; padding:24px; }
 }
 
+/* subtle scanlines (kept) */
 body::after {
     content:"";
     position:fixed;
@@ -160,6 +168,7 @@ body::after {
     mix-blend-mode:overlay;
 }
 
+/* fade-in keyframe used for home */
 @keyframes fadeIn {
     from { opacity:0; transform:translate(-50%, -55%); }
     to   { opacity:1; transform:translate(-50%, -50%); }
@@ -168,14 +177,23 @@ body::after {
 </head>
 
 <body>
+
+<!-- HOME -->
 <div id="home">
+    <!-- Title uses Montserrat, uppercase -->
     <h1 class="title-main">THE CODE</h1>
+
+    <!-- Typing line using Bitcount -->
     <p><span class="typewriter">Welcome back, Decoder.</span></p>
+
+    <!-- Buttons call playClick then open -->
     <button onclick="playClick(); openPage('hub')">Enter Hub</button>
 </div>
 
+<!-- OVERLAY -->
 <div id="overlay" onclick="playClick(); closePage()"></div>
 
+<!-- HUB -->
 <div id="hub" class="page" aria-hidden="true">
     <h2 style="margin-top:0; font-weight:700;">Case Hub</h2>
     <button onclick="playClick(); openPage('case1')">Case 1</button><br>
@@ -184,6 +202,7 @@ body::after {
     <button onclick="playClick(); closePage()">Close</button>
 </div>
 
+<!-- CASE 1 -->
 <div id="case1" class="page" aria-hidden="true">
     <h2 style="margin-top:0; font-weight:700;">Case 1</h2>
     <p>Mã liên hệ Cyphers:</p>
@@ -195,6 +214,7 @@ body::after {
     <p id="r1"></p>
 </div>
 
+<!-- CASE 2 -->
 <div id="case2" class="page" aria-hidden="true">
     <h2 style="margin-top:0; font-weight:700;">Case 2</h2>
     <p>Mã liên hệ Cyphers:</p>
@@ -206,6 +226,7 @@ body::after {
     <p id="r2"></p>
 </div>
 
+<!-- CASE 3 -->
 <div id="case3" class="page" aria-hidden="true">
     <h2 style="margin-top:0; font-weight:700;">Case 3</h2>
     <p>Mã liên hệ Cyphers:</p>
@@ -217,18 +238,25 @@ body::after {
     <p id="r3"></p>
 </div>
 
+<!-- Audio element for click sound -->
 <audio id="clickSound" src="sounds/click.mp3" preload="auto"></audio>
 
 <script>
+/* Play click sound */
 function playClick(){
     const s = document.getElementById('clickSound');
     if(!s) return;
-    try{ s.currentTime = 0; s.play(); }catch(e){}
+    try{
+        s.currentTime = 0;
+        s.play();
+    }catch(e){ /* ignore autoplay errors */ }
 }
 
+/* overlay open/close logic (keeps overlay persistent, full-screen) */
 function closePage(){
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
     document.getElementById("overlay").classList.remove("active");
+    // accessibility
     document.getElementById('home').setAttribute('aria-hidden','false');
 }
 
@@ -237,16 +265,22 @@ function openPage(id){
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
     const target = document.getElementById(id);
     target.classList.add("active");
+    // accessibility
     document.getElementById('home').setAttribute('aria-hidden','true');
     target.setAttribute('aria-hidden','false');
+    // autofocus input if present
     const input = target.querySelector('input');
     if(input) setTimeout(()=> input.focus(), 220);
 }
 
+/* check code logic */
 function check(n){
     const val = document.getElementById('c'+n).value.trim();
     const out = document.getElementById('r'+n);
-    if(!val){ out.innerText = "Chưa nhập mã."; return; }
+    if(!val){
+        out.innerText = "Chưa nhập mã.";
+        return;
+    }
 
     if(
         (n===1 && val==="111") ||
@@ -256,10 +290,18 @@ function check(n){
         out.innerText = "Code đúng!";
     } else {
         out.innerText = "Sai mã.";
+        // small shake effect
         const inp = document.getElementById('c'+n);
         inp.classList.add('shake');
         setTimeout(()=> inp.classList.remove('shake'), 300);
     }
 }
 
-const shakeStyle = document.createElement('
+/* small shake CSS injection so we don't rewrite big CSS block */
+const shakeStyle = document.createElement('style');
+shakeStyle.innerHTML = `@keyframes shake {0%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}100%{transform:translateX(0)}} .shake{animation:shake .32s linear}`;
+document.head.appendChild(shakeStyle);
+</script>
+
+</body>
+</html>
