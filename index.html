@@ -15,7 +15,7 @@
   font-display: swap;
 }
 
-/* Áp dụng cho toàn bộ */
+/* Áp dụng font cho toàn bộ */
 body, h1, h2, p, button, input {
   font-family: "Bitcount Prop Single", system-ui;
   font-optical-sizing: auto;
@@ -26,21 +26,34 @@ body, h1, h2, p, button, input {
     "CRSV" 0.5,
     "ELSH" 0,
     "ELXP" 0;
+  color: #eee;
+  margin: 0;
+  padding: 0;
 }
 
-body {
-  background:#0a0a0a url('images/bg_home.jpg') center/cover no-repeat;
-  color:#eee;
-  margin:0;
-  padding:0;
+/* Toàn bộ màn hình, căn giữa nội dung và ảnh nền */
+.screen {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* căn giữa theo chiều dọc */
+  align-items: center;     /* căn giữa theo chiều ngang */
+  text-align: center;
+  padding: 0 20px;
 }
 
-.screen { display:none; padding:40px; }
-.active { display:block; }
+.active { display: flex; }
 
+/* Button và input */
 button { 
   padding:10px 18px; 
-  margin:10px 0; 
+  margin:10px auto; 
   cursor:pointer; 
   border:0; 
   background:#222; 
@@ -55,11 +68,18 @@ input {
   border:1px solid #444; 
   color:#eee; 
   width:200px; 
-  margin-bottom:10px; 
+  margin:10px auto; 
+  display:block;
 }
 
-img { max-width:100%; height:auto; display:block; margin:20px 0; }
+img { max-width:100%; height:auto; margin:20px 0; }
 
+/* Background riêng cho từng trang */
+#home { background-image: url('images/bg_home.jpg'); }
+#hub { background-image: url('images/bg_hub.jpg'); }
+#case1 { background-image: url('images/bg_case1.jpg'); }
+#case2 { background-image: url('images/bg_case2.jpg'); }
+#case3 { background-image: url('images/bg_case3.jpg'); }
 </style>
 </head>
 <body>
@@ -84,7 +104,7 @@ img { max-width:100%; height:auto; display:block; margin:20px 0; }
 </div>
 
 <!-- CASE 1 -->
-<div id="case1" class="screen" style="background:#0a0a0a url('images/bg_case1.jpg') center/cover no-repeat;">
+<div id="case1" class="screen">
   <h1>Case 1</h1>
   <p>Nội dung Case 1</p>
   <img id="img1" src="images/case1.png" alt="Case 1">
@@ -96,7 +116,7 @@ img { max-width:100%; height:auto; display:block; margin:20px 0; }
 </div>
 
 <!-- CASE 2 -->
-<div id="case2" class="screen" style="background:#0a0a0a url('images/bg_case2.jpg') center/cover no-repeat;">
+<div id="case2" class="screen">
   <h1>Case 2</h1>
   <p>Nội dung Case 2</p>
   <img id="img2" src="images/case2.png" alt="Case 2">
@@ -108,7 +128,7 @@ img { max-width:100%; height:auto; display:block; margin:20px 0; }
 </div>
 
 <!-- CASE 3 -->
-<div id="case3" class="screen" style="background:#0a0a0a url('images/bg_case3.jpg') center/cover no-repeat;">
+<div id="case3" class="screen">
   <h1>Case 3</h1>
   <p>Nội dung Case 3</p>
   <img id="img3" src="images/case3.png" alt="Case 3">
