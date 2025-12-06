@@ -3,75 +3,89 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Case Web Game</title>
+<title>The CODE</title>
 <style>
- body { background:#0a0a0a; color:#eee; font-family:Arial; margin:0; padding:0; }
- .screen { display:none; padding:40px; }
- .active { display:block; }
- button { padding:10px 18px; margin:10px 0; cursor:pointer; border:0; background:#222; color:#eee; }
- input { padding:8px; background:#111; border:1px solid #444; color:#eee; }
- .link { color:#8cf; cursor:pointer; text-decoration:underline; }
- img { max-width:100%; height:auto; display:block; margin:20px 0; }
+body { background:#0a0a0a; color:#eee; font-family:Arial; margin:0; padding:0; }
+.screen { display:none; padding:40px; }
+.active { display:block; }
+button { padding:10px 18px; margin:10px 0; cursor:pointer; border:0; background:#222; color:#eee; display:block; width:200px; }
+input { padding:8px; background:#111; border:1px solid #444; color:#eee; width:200px; margin-bottom:10px; }
+img { max-width:100%; height:auto; display:block; margin:20px 0; }
 </style>
 </head>
 <body>
 
+<!-- TRANG CHỦ -->
 <div id="home" class="screen active">
- <h1>Trang chủ</h1>
- <button onclick="go('case1')">Đi đến Case 1</button>
+  <h1>The CODE</h1>
+  <p style="font-size:18px; color:#aaa;">Welcome back, Decoder.</p>
+  <button onclick="go('hub')">Tiến hành vụ án</button>
 </div>
 
+<!-- TRANG HUB: 3 CASE -->
+<div id="hub" class="screen">
+  <h1>Case Hub</h1>
+  <p>Chọn Case muốn thực hiện:</p>
+  <div class="case-buttons">
+    <button onclick="go('case1')">Case 1</button>
+    <button onclick="go('case2')">Case 2</button>
+    <button onclick="go('case3')">Case 3</button>
+  </div>
+  <button onclick="go('home')">Quay lại Trang chủ</button>
+</div>
+
+<!-- CASE 1 -->
 <div id="case1" class="screen">
- <h1>Case 1</h1>
- <p class="link" onclick="go('case1_lock')">Mục cần mở khóa</p>
- <button onclick="go('home')">Quay lại</button>
+  <h1>Case 1</h1>
+  <p><!-- Thay chữ tại đây -->Nội dung Case 1</p>
+  <img id="img1" src="images/case1.png" alt="Case 1">
+  <p>Nhập code để unlock slide:</p>
+  <input id="codeInput1" placeholder="Nhập code Case 1" />
+  <button onclick="checkCode('codeInput1')">Xác nhận</button>
+  <p id="codeResult1"></p>
+  <button onclick="go('hub')">Quay lại Hub</button>
 </div>
 
-<div id="case1_lock" class="screen">
- <h1>Nhập mã</h1>
- <input id="codeInput" placeholder="Nhập code" />
- <button onclick="checkCode()">Xác nhận</button>
- <p id="codeResult"></p>
- <button onclick="go('case1')">Quay lại</button>
+<!-- CASE 2 -->
+<div id="case2" class="screen">
+  <h1>Case 2</h1>
+  <p><!-- Thay chữ tại đây -->Nội dung Case 2</p>
+  <img id="img2" src="images/case2.png" alt="Case 2">
+  <p>Nhập code để unlock slide:</p>
+  <input id="codeInput2" placeholder="Nhập code Case 2" />
+  <button onclick="checkCode('codeInput2')">Xác nhận</button>
+  <p id="codeResult2"></p>
+  <button onclick="go('hub')">Quay lại Hub</button>
 </div>
 
-<!-- -------- SLIDES / PAGES -------- -->
-<div id="pageA" class="screen">
-  <h1>Trang A</h1>
-  <p><!-- Thay chữ tại đây -->Nội dung trang A</p>
-  <!-- Thay ảnh tại đây -->
-  <img src="images/pageA.png" alt="Ảnh Trang A">
+<!-- CASE 3 -->
+<div id="case3" class="screen">
+  <h1>Case 3</h1>
+  <p><!-- Thay chữ tại đây -->Nội dung Case 3</p>
+  <img id="img3" src="images/case3.png" alt="Case 3">
+  <p>Nhập code để unlock slide:</p>
+  <input id="codeInput3" placeholder="Nhập code Case 3" />
+  <button onclick="checkCode('codeInput3')">Xác nhận</button>
+  <p id="codeResult3"></p>
+  <button onclick="go('hub')">Quay lại Hub</button>
 </div>
 
-<div id="pageB" class="screen">
-  <h1>Trang B</h1>
-  <p><!-- Thay chữ tại đây -->Nội dung trang B</p>
-  <!-- Thay ảnh tại đây -->
-  <img src="images/pageB.png" alt="Ảnh Trang B">
-</div>
-
-<div id="pageC" class="screen">
-  <h1>Trang C</h1>
-  <p><!-- Thay chữ tại đây -->Nội dung trang C</p>
-  <!-- Thay ảnh tại đây -->
-  <img src="images/pageC.png" alt="Ảnh Trang C">
-</div>
-
-<div id="pageD" class="screen">
-  <h1>Trang D</h1>
-  <p><!-- Thay chữ tại đây -->Nội dung trang D</p>
-  <!-- Thay ảnh tại đây -->
-  <img src="images/pageD.png" alt="Ảnh Trang D">
-</div>
+<!-- SLIDES -->
+<div id="slide1A" class="screen"><h1>Slide 1A</h1><p>Nội dung Slide 1A</p></div>
+<div id="slide1B" class="screen"><h1>Slide 1B</h1><p>Nội dung Slide 1B</p></div>
+<div id="slide2A" class="screen"><h1>Slide 2A</h1><p>Nội dung Slide 2A</p></div>
+<div id="slide2B" class="screen"><h1>Slide 2B</h1><p>Nội dung Slide 2B</p></div>
+<div id="slide3A" class="screen"><h1>Slide 3A</h1><p>Nội dung Slide 3A</p></div>
+<div id="slide3B" class="screen"><h1>Slide 3B</h1><p>Nội dung Slide 3B</p></div>
 
 <!-- ADMIN PANEL -->
 <div id="admin" class="screen">
- <h1>ADMIN PANEL</h1>
- <p>Đổi nội dung các trang:</p>
- <textarea id="adminData" style="width:100%;height:200px;"></textarea>
- <br>
- <button onclick="saveAdmin()">Lưu</button>
- <button onclick="go('home')">Về trang chủ</button>
+  <h1>ADMIN PANEL</h1>
+  <p>Đổi nội dung các trang (text và ảnh):</p>
+  <textarea id="adminData" style="width:100%;height:300px;"></textarea>
+  <br>
+  <button onclick="saveAdmin()">Lưu</button>
+  <button onclick="go('home')">Về Trang chủ</button>
 </div>
 
 <script>
@@ -84,10 +98,18 @@ function go(id){
 // -------- DEFAULT DATA --------
 let data = {
  codes: {
-   "111": "pageA",
-   "222": "pageB",
-   "333": "pageC",
-   "444": "pageD"
+   // Code nhập → slide mở ra
+   "111": "slide1A",
+   "112": "slide1B",
+   "221": "slide2A",
+   "222": "slide2B",
+   "331": "slide3A",
+   "332": "slide3B"
+ },
+ pages: {
+   "case1": {text:"Nội dung Case 1", img:"images/case1.png"},
+   "case2": {text:"Nội dung Case 2", img:"images/case2.png"},
+   "case3": {text:"Nội dung Case 3", img:"images/case3.png"}
  }
 };
 
@@ -95,13 +117,14 @@ let data = {
 if(localStorage.adminData){ data = JSON.parse(localStorage.adminData); }
 
 // -------- CODE CHECK --------
-function checkCode(){
- const val = document.getElementById('codeInput').value;
+function checkCode(inputId){
+ const val = document.getElementById(inputId).value;
+ let resultId = inputId.replace('codeInput','codeResult');
  if(data.codes[val]){
    go(data.codes[val]);
-   document.getElementById('codeResult').innerText = "";
+   document.getElementById(resultId).innerText = "";
  } else {
-   document.getElementById('codeResult').innerText = "Sai mã";
+   document.getElementById(resultId).innerText = "Sai mã";
  }
 }
 
@@ -116,6 +139,11 @@ function saveAdmin(){
    const newData = JSON.parse(document.getElementById('adminData').value);
    data = newData;
    localStorage.adminData = JSON.stringify(data);
+   // Update ảnh + text ngay trong các Case
+   for(let i=1;i<=3;i++){
+     document.querySelector("#case"+i+" p").innerText = data.pages["case"+i].text;
+     document.querySelector("#img"+i).src = data.pages["case"+i].img;
+   }
    alert('Đã lưu');
  } catch(e){ alert('Sai format JSON'); }
 }
