@@ -272,15 +272,16 @@ function openPage(id){
     if(input) setTimeout(()=> input.focus(), 250);
 }
 
-/* ===== CODE ROUTING SYSTEM ===== */
-/* 4 code tổng */
+/* ===== CODE ROUTING SYSTEM (UPDATED) ===== */
+/* 4 code chính mới */
 const codes = {
-    A: "AX01",
-    B: "BX02",
-    C: "CX03",
-    D: "DX04"
+    A: "AAAA",
+    B: "BBBB",
+    C: "CCCC",
+    D: "DDDD"
 };
 
+/* Trả về nhóm code dựa trên input */
 function detectCode(val){
     if(val === codes.A) return "A";
     if(val === codes.B) return "B";
@@ -301,11 +302,9 @@ function check(n){
         return;
     }
 
-    /* xác định code thuộc nhóm nào */
     const key = detectCode(val);
 
     if(!key){
-        // WRONG
         out.innerText = "Error";
         out.style.color = "#ff4d4d";
 
@@ -328,7 +327,6 @@ function check(n){
     inp.style.border = "2px solid #4dff88";
     inp.style.boxShadow = "0 0 12px #4dff8855 inset";
 
-    // 600ms delay → chuyển trang
     setTimeout(()=>{
         window.location.href = `/case${n}_${key}.html`;
     }, 600);
