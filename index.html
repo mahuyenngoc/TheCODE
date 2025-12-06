@@ -1,189 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The CODE</title>
-
-<!-- Font Bitcount Prop Single -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
-
 <style>
-body, html {
-    margin:0;
-    padding:0;
-    width:100%;
-    height:100%;
-    font-family: "Bitcount Prop Single", system-ui;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings: "slnt" 0, "CRSV" 0.5, "ELSH" 0, "ELXP" 0;
-}
-
-.screen {
-    display:none;
-    width:100%;
-    height:100%;
-    background-image: url('images/bg_home.jpg');
-    background-size: cover;
-    background-position: center;
-    color:#000;
+  /* BODY + BG */
+  body {
+    margin:0; padding:0;
+    background:url('bg_home.jpg') no-repeat center center fixed;
+    background-size:cover;
+    font-family: Arial, sans-serif;
+    height:100vh;
+    display:flex;
     justify-content:center;
     align-items:center;
+  }
+
+  /* POPUP */
+  .popup {
+    display:none;
+    background: rgba(255,255,255,0.95);
+    padding:40px;
     text-align:center;
-    padding:20px;
-    box-sizing:border-box;
-    flex-direction:column;
-}
+    border-radius:15px;
+    width:80%;
+    max-width:500px;
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
+  }
+  .popup.active { display:block; }
 
-.active {
-    display:flex;
-}
+  h1 { font-size:36px; margin-bottom:20px; }
+  h2 { font-size:20px; margin-bottom:20px; color:#333; }
 
-h1 {
-    font-size:4em;
-    margin-bottom:0.2em;
-}
-
-p {
-    font-size:1.5em;
-    margin:0.5em 0;
-}
-
-input {
+  input[type="text"] {
+    width:80%;
     padding:10px;
-    background:#000;
-    border:1px solid #444;
+    font-size:16px;
+    margin-bottom:15px;
     color:#fff;
-    width:250px;
-    margin-bottom:10px;
-    font-size:1.2em;
-    text-align:center;
-}
+    background:#000;
+    border:none;
+    border-radius:5px;
+  }
 
-button {
-    padding:12px 20px;
-    margin:10px 0;
+  button {
+    padding:10px 20px;
+    margin-top:10px;
     cursor:pointer;
-    border:0;
+    border:none;
+    border-radius:5px;
     background:#222;
     color:#eee;
-    font-size:1.2em;
-    min-width:200px;
-}
+    font-size:16px;
+  }
 
-button:hover { background:#555; }
-
-img { max-width:80%; height:auto; margin:20px 0; }
-
-.case-buttons {
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
+  p { color:#000; }
 </style>
 </head>
 <body>
 
-<!-- TRANG CHỦ -->
-<div id="home" class="screen active">
-    <h1>The CODE</h1>
-    <p>Welcome back, Decoder.</p>
-    <button onclick="go('hub')">Tiến hành vụ án</button>
+<!-- HOME -->
+<div id="home" class="popup active">
+  <h1>The CODE</h1>
+  <p>Welcome back, Decoder.</p>
+  <button onclick="showPopup('hub')">Tiến hành vụ án</button>
 </div>
 
-<!-- HUB PAGE -->
-<div id="hub" class="screen">
-    <h1>Case Hub</h1>
-    <p>Chọn Case muốn thực hiện:</p>
-    <div class="case-buttons">
-        <button onclick="go('case1')">Case 1</button>
-        <button onclick="go('case2')">Case 2</button>
-        <button onclick="go('case3')">Case 3</button>
-    </div>
-    <button onclick="go('home')">Quay lại Trang chủ</button>
+<!-- HUB -->
+<div id="hub" class="popup">
+  <h1>Case Hub</h1>
+  <p>Chọn Case muốn thực hiện:</p>
+  <button onclick="showPopup('case1')">Case 1</button>
+  <button onclick="showPopup('case2')">Case 2</button>
+  <button onclick="showPopup('case3')">Case 3</button>
 </div>
 
 <!-- CASE 1 -->
-<div id="case1" class="screen">
-    <h1>Case 1</h1>
-    <p id="text1">Nội dung Case 1</p>
-    <img id="img1" src="images/case1.png" alt="Case 1">
-    <p>Nhập code để unlock slide:</p>
-    <input id="codeInput1" placeholder="Nhập code Case 1" />
-    <button onclick="checkCode('codeInput1')">Xác nhận</button>
-    <p id="codeResult1"></p>
-    <button onclick="go('hub')">Quay lại Hub</button>
+<div id="case1" class="popup">
+  <h1>Case 1</h1>
+  <h2>LIÊN HỆ TRỢ GIÚP</h2>
+  <input type="text" id="code1" placeholder="Mã liên lạc">
+  <br>
+  <button onclick="checkCode('code1')">Xác nhận</button>
+  <p id="result1"></p>
+  <button onclick="showPopup('hub')">Quay lại Hub</button>
 </div>
 
 <!-- CASE 2 -->
-<div id="case2" class="screen">
-    <h1>Case 2</h1>
-    <p id="text2">Nội dung Case 2</p>
-    <img id="img2" src="images/case2.png" alt="Case 2">
-    <p>Nhập code để unlock slide:</p>
-    <input id="codeInput2" placeholder="Nhập code Case 2" />
-    <button onclick="checkCode('codeInput2')">Xác nhận</button>
-    <p id="codeResult2"></p>
-    <button onclick="go('hub')">Quay lại Hub</button>
+<div id="case2" class="popup">
+  <h1>Case 2</h1>
+  <h2>LIÊN HỆ TRỢ GIÚP</h2>
+  <input type="text" id="code2" placeholder="Mã liên lạc">
+  <br>
+  <button onclick="checkCode('code2')">Xác nhận</button>
+  <p id="result2"></p>
+  <button onclick="showPopup('hub')">Quay lại Hub</button>
 </div>
 
 <!-- CASE 3 -->
-<div id="case3" class="screen">
-    <h1>Case 3</h1>
-    <p id="text3">Nội dung Case 3</p>
-    <img id="img3" src="images/case3.png" alt="Case 3">
-    <p>Nhập code để unlock slide:</p>
-    <input id="codeInput3" placeholder="Nhập code Case 3" />
-    <button onclick="checkCode('codeInput3')">Xác nhận</button>
-    <p id="codeResult3"></p>
-    <button onclick="go('hub')">Quay lại Hub</button>
+<div id="case3" class="popup">
+  <h1>Case 3</h1>
+  <h2>LIÊN HỆ TRỢ GIÚP</h2>
+  <input type="text" id="code3" placeholder="Mã liên lạc">
+  <br>
+  <button onclick="checkCode('code3')">Xác nhận</button>
+  <p id="result3"></p>
+  <button onclick="showPopup('hub')">Quay lại Hub</button>
 </div>
 
-<!-- SLIDES -->
-<div id="slide1A" class="screen"><h1>Slide 1A</h1><p>Nội dung Slide 1A</p></div>
-<div id="slide1B" class="screen"><h1>Slide 1B</h1><p>Nội dung Slide 1B</p></div>
-<div id="slide2A" class="screen"><h1>Slide 2A</h1><p>Nội dung Slide 2A</p></div>
-<div id="slide2B" class="screen"><h1>Slide 2B</h1><p>Nội dung Slide 2B</p></div>
-<div id="slide3A" class="screen"><h1>Slide 3A</h1><p>Nội dung Slide 3A</p></div>
-<div id="slide3B" class="screen"><h1>Slide 3B</h1><p>Nội dung Slide 3B</p></div>
-
 <script>
-function go(id){
-    // Ẩn tất cả các screen
-    const screens = document.querySelectorAll('.screen');
-    screens.forEach(s => s.classList.remove('active'));
-    // Hiển thị screen hiện tại
-    const current = document.getElementById(id);
-    if(current){
-        current.classList.add('active');
-    }
+function showPopup(id){
+  document.querySelectorAll('.popup').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
-
-let data = {
- codes: {
-   "111": "slide1A",
-   "112": "slide1B",
-   "221": "slide2A",
-   "222": "slide2B",
-   "331": "slide3A",
-   "332": "slide3B"
- }
-};
 
 function checkCode(inputId){
-    const val = document.getElementById(inputId).value;
-    const resultId = inputId.replace('codeInput','codeResult');
-    if(data.codes[val]){
-        go(data.codes[val]);
-        document.getElementById(resultId).innerText = "";
-    } else {
-        document.getElementById(resultId).innerText = "Sai mã";
-    }
+  const val = document.getElementById(inputId).value;
+  let result = document.getElementById('result'+inputId.replace('code',''));
+  // Demo code check
+  if(val === '123'){ 
+    result.innerText = "Mã hợp lệ!";
+  } else {
+    result.innerText = "Sai mã!";
+  }
 }
 </script>
+
 </body>
 </html>
+
