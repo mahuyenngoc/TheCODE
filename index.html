@@ -4,63 +4,68 @@
 <meta charset="UTF-8">
 <title>The CODE</title>
 
-<!-- Font -->
+<!-- FONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
 
 <style>
+/* NỀN CHÍNH */
 body {
     margin:0;
     padding:0;
     font-family:"Bitcount Prop Single", system-ui;
-    background:url("images/bg_home.jpg") center/cover no-repeat fixed;
+    background:url('images/bg_home.jpg') center/cover no-repeat fixed;
     height:100vh;
     overflow:hidden;
     color:white;
     text-align:center;
 }
 
-/* HOME PAGE (luôn hiển thị) */
+/* HOME PAGE */
 #home {
     position:absolute;
     top:50%;
     left:50%;
     transform:translate(-50%, -50%);
+    text-align:center;
 }
 
-/* LAYER OVERLAY MỜ */
+/* OVERLAY */
 #overlay {
     display:none;
     position:fixed;
     top:0; left:0;
-    width:100vw;
-    height:100vh;
-    background:rgba(0,0,0,0.45);
-    backdrop-filter:blur(4px);
-    z-index:5;
-}
-
-/* POPUP PAGE */
-.popup {
-    display:none;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    width:70vw;
-    max-width:500px;
-    padding:30px;
-    background:rgba(0,0,0,0.65);
-    border:1px solid #666;
-    border-radius:12px;
-    box-shadow:0 0 25px black;
-
-    text-align:center;
+    width:100vw; height:100vh;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(2px);
     z-index:10;
 }
 
-.popup.active {
+/* POPUP PAGE */
+.page {
+    display:none;
+    position:fixed;
+    top:50%; left:50%;
+    transform:translate(-50%, -50%);
+
+    width:80vw;
+    max-width:500px;
+
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(8px);
+    border-radius:10px;
+    border:1px solid #777;
+    padding:30px;
+
+    box-shadow:0 0 30px black;
+    z-index:20;
+
+    color:white;
+    text-align:center;
+}
+
+.page.active {
     display:block !important;
 }
 
@@ -76,9 +81,7 @@ button {
     font-size:18px;
     min-width:180px;
 }
-button:hover {
-    background:#444;
-}
+button:hover { background:#444; }
 
 /* INPUT */
 input {
@@ -95,82 +98,89 @@ input {
 
 <body>
 
-<!-- HOME PAGE -->
+<!-- HOME -->
 <div id="home">
-    <h1 style="font-size:4em; margin-bottom:0;">The CODE</h1>
-    <p style="font-size:20px; margin-top:5px;">Welcome back, Decoder.</p>
-    <button onclick="openPopup('hub')">Enter Hub</button>
+    <h1 style="font-size:4em;margin-bottom:0;">The CODE</h1>
+    <p style="font-size:20px;margin-top:6px;">Welcome back, Decoder.</p>
+    <button onclick="openPage('hub')">Enter Hub</button>
 </div>
 
-<!-- OVERLAY -->
-<div id="overlay" onclick="closeAll()"></div>
+<!-- NỀN MỜ -->
+<div id="overlay" onclick="closePage()"></div>
 
-<!-- HUB POPUP -->
-<div id="hub" class="popup">
+<!-- HUB -->
+<div id="hub" class="page">
     <h1>Case Hub</h1>
-    <button onclick="openPopup('case1')">Case 1</button><br>
-    <button onclick="openPopup('case2')">Case 2</button><br>
-    <button onclick="openPopup('case3')">Case 3</button><br>
-    <button onclick="closeAll()">Close</button>
+    <button onclick="openPage('case1')">Case 1</button><br>
+    <button onclick="openPage('case2')">Case 2</button><br>
+    <button onclick="openPage('case3')">Case 3</button><br>
+    <button onclick="closePage()">Close</button>
 </div>
 
 <!-- CASE 1 -->
-<div id="case1" class="popup">
+<div id="case1" class="page">
     <h1>Case 1</h1>
     <p>Mã liên hệ Cyphers:</p>
-    <input id="input1">
+
+    <input id="c1">
     <button onclick="check(1)">Xác nhận</button>
-    <p id="result1"></p>
-    <button onclick="openPopup('hub')">Back to Hub</button>
+    <p id="r1"></p>
+
+    <button onclick="openPage('hub')">Back to Hub</button>
 </div>
 
 <!-- CASE 2 -->
-<div id="case2" class="popup">
+<div id="case2" class="page">
     <h1>Case 2</h1>
     <p>Mã liên hệ Cyphers:</p>
-    <input id="input2">
+
+    <input id="c2">
     <button onclick="check(2)">Xác nhận</button>
-    <p id="result2"></p>
-    <button onclick="openPopup('hub')">Back to Hub</button>
+    <p id="r2"></p>
+
+    <button onclick="openPage('hub')">Back to Hub</button>
 </div>
 
 <!-- CASE 3 -->
-<div id="case3" class="popup">
+<div id="case3" class="page">
     <h1>Case 3</h1>
     <p>Mã liên hệ Cyphers:</p>
-    <input id="input3">
+
+    <input id="c3">
     <button onclick="check(3)">Xác nhận</button>
-    <p id="result3"></p>
-    <button onclick="openPopup('hub')">Back to Hub</button>
+    <p id="r3"></p>
+
+    <button onclick="openPage('hub')">Back to Hub</button>
 </div>
 
 <script>
-function closeAll(){
+function closePage(){
     document.getElementById("overlay").style.display="none";
-    document.querySelectorAll('.popup').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
 }
 
-function openPopup(id){
-    closeAll(); // đảm bảo ko popup nào mở trước
+function openPage(id){
+    closePage();
     document.getElementById("overlay").style.display="block";
     document.getElementById(id).classList.add("active");
 }
 
 function check(n){
-    let val = document.getElementById("input"+n).value;
-    let res = document.getElementById("result"+n);
+    let val = document.getElementById("c"+n).value;
+    let out = document.getElementById("r"+n);
 
     if(
         (n===1 && val==="111") ||
         (n===2 && val==="222") ||
         (n===3 && val==="333")
     ){
-        res.innerText = "Code đúng!";
+        out.innerText = "Code đúng!";
     } else {
-        res.innerText = "Sai mã.";
+        out.innerText = "Sai mã.";
     }
 }
 </script>
 
 </body>
 </html>
+
