@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The CODE</title>
+<meta charset="UTF-8">
+<title>The CODE – Home</title>
 
-<!-- Font Bitcount Prop Single -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
@@ -15,31 +13,100 @@ body {
     margin:0;
     padding:0;
     font-family: "Bitcount Prop Single", system-ui;
-}
-
-/* ----- SCREEN / POPUP ----- */
-.popup {
-    display:none;
-    width:100vw;
+    background:url('images/bg_home.jpg') center/cover no-repeat;
     height:100vh;
-    background-image:url('images/bg_home.jpg');
-    background-size: cover;
-    background-position: center;
-    color:#000;
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
-    text-align:center;
-    padding:20px;
-    box-sizing:border-box;
+    flex-direction:column;
+    color:white;
+    text-shadow:0 0 10px black;
 }
+button {
+    padding:12px 20px;
+    margin-top:20px;
+    background:#111;
+    color:white;
+    border:0;
+    cursor:pointer;
+    font-size:18px;
+}
+button:hover { background:#555; }
+</style>
+</head>
 
-.popup.active { display:flex; }
+<body>
+    <h1 style="font-size:4em;">The CODE</h1>
+    <p style="font-size:20px;">Welcome back, Decoder.</p>
 
-h1 { font-size:4em; margin-bottom:0.2em; }
-p { font-size:1.5em; margin:0.5em 0; }
+    <button onclick="location.href='hub.html'">Tiến hành vụ án</button>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The CODE – Hub</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin:0; padding:0;
+    font-family: "Bitcount Prop Single", system-ui;
+    background:url('images/bg_home.jpg') center/cover no-repeat;
+    height:100vh; display:flex;
+    justify-content:center; align-items:center;
+    flex-direction:column; color:white;
+    text-shadow:0 0 10px black;
+}
+button {
+    padding:12px 20px;
+    margin:10px 0;
+    background:#111;
+    color:white;
+    border:0;
+    cursor:pointer;
+    font-size:18px;
+    width:220px;
+}
+button:hover { background:#555; }
+</style>
+</head>
+
+<body>
+    <h1 style="font-size:3em;">Case Hub</h1>
+    <p>Chọn Case muốn thực hiện:</p>
+
+    <button onclick="location.href='case1.html'">Case 1</button>
+    <button onclick="location.href='case2.html'">Case 2</button>
+    <button onclick="location.href='case3.html'">Case 3</button>
+
+    <button onclick="location.href='index.html'">Quay lại Trang chủ</button>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 1</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin:0; padding:0;
+    font-family:"Bitcount Prop Single", system-ui;
+    background:url('images/bg_home.jpg') center/cover no-repeat;
+    height:100vh; display:flex;
+    justify-content:center; align-items:center;
+    flex-direction:column; color:white;
+    text-shadow:0 0 10px black;
+}
 input {
     padding:10px;
     background:#000;
@@ -52,92 +119,132 @@ input {
 }
 button {
     padding:12px 20px;
-    margin:10px 0;
-    cursor:pointer;
+    margin:10px;
+    background:#111;
+    color:white;
     border:0;
-    background:#222;
-    color:#eee;
-    display:block;
-    font-size:1.2em;
-    min-width:200px;
+    cursor:pointer;
+    font-size:18px;
 }
 button:hover { background:#555; }
-
-img { max-width:80%; height:auto; margin:20px 0; }
-
 </style>
 </head>
 
 <body>
+    <h1 style="font-size:3em;">Case 1</h1>
+    <p>Mã liên lạc:</p>
 
-<!-- NỀN -->
-<div id="bg"></div>
+    <input id="code">
+    <button onclick="check()">Xác nhận</button>
 
-<!-- HOME -->
-<div id="home" class="popup active">
-  <h1>The CODE</h1>
-  <p>Welcome back, Decoder.</p>
-  <button onclick="showPopup('hub')">Tiến hành vụ án</button>
-</div>
+    <p id="result"></p>
 
-<!-- HUB -->
-<div id="hub" class="popup">
-  <h1>Case Hub</h1>
-  <p>Chọn Case muốn thực hiện:</p>
-  <button onclick="showPopup('case1')">Case 1</button>
-  <button onclick="showPopup('case2')">Case 2</button>
-  <button onclick="showPopup('case3')">Case 3</button>
-</div>
-
-<!-- CASE 1 -->
-<div id="case1" class="popup">
-  <h1>Case 1</h1>
-  <h2>LIÊN HỆ TRỢ GIÚP</h2>
-  <input type="text" id="code1" placeholder="Mã liên lạc">
-  <br>
-  <button onclick="checkCode('code1')">Xác nhận</button>
-  <p id="result1"></p>
-  <button onclick="showPopup('hub')">Quay lại Hub</button>
-</div>
-
-<!-- CASE 2 -->
-<div id="case2" class="popup">
-  <h1>Case 2</h1>
-  <h2>LIÊN HỆ TRỢ GIÚP</h2>
-  <input type="text" id="code2" placeholder="Mã liên lạc">
-  <br>
-  <button onclick="checkCode('code2')">Xác nhận</button>
-  <p id="result2"></p>
-  <button onclick="showPopup('hub')">Quay lại Hub</button>
-</div>
-
-<!-- CASE 3 -->
-<div id="case3" class="popup">
-  <h1>Case 3</h1>
-  <h2>LIÊN HỆ TRỢ GIÚP</h2>
-  <input type="text" id="code3" placeholder="Mã liên lạc">
-  <br>
-  <button onclick="checkCode('code3')">Xác nhận</button>
-  <p id="result3"></p>
-  <button onclick="showPopup('hub')">Quay lại Hub</button>
-</div>
+    <button onclick="location.href='hub.html'">Quay lại Hub</button>
 
 <script>
-function showPopup(id){
-  document.querySelectorAll('.popup').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-function checkCode(inputId){
-  const val = document.getElementById(inputId).value;
-  let result = document.getElementById('result'+inputId.replace('code',''));
-  if(val === '123'){ 
-    result.innerText = "Mã hợp lệ!";
-  } else {
-    result.innerText = "Sai mã!";
-  }
+function check(){
+    const v = document.getElementById("code").value;
+    document.getElementById("result").innerText =
+        v === "111" ? "Case 1 code đúng!" : "Sai mã";
 }
 </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 2</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin:0; padding:0;
+    font-family:"Bitcount Prop Single"; background:url('images/bg_home.jpg') center/cover no-repeat;
+    height:100vh; display:flex; justify-content:center; align-items:center;
+    flex-direction:column; color:white; text-shadow:0 0 10px black;
+}
+input {
+    padding:10px; background:#000; border:1px solid #444;
+    color:#fff; width:250px; margin-bottom:10px; font-size:1.2em; text-align:center;
+}
+button {
+    padding:12px 20px; margin:10px; background:#111; color:white; border:0;
+    cursor:pointer; font-size:18px;
+}
+button:hover { background:#555; }
+</style>
+</head>
+
+<body>
+    <h1 style="font-size:3em;">Case 2</h1>
+    <p>Mã liên lạc:</p>
+
+    <input id="code">
+    <button onclick="check()">Xác nhận</button>
+
+    <p id="result"></p>
+
+    <button onclick="location.href='hub.html'">Quay lại Hub</button>
+
+<script>
+function check(){
+    const v = document.getElementById("code").value;
+    document.getElementById("result").innerText =
+        v === "222" ? "Case 2 code đúng!" : "Sai mã";
+}
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 3</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin:0; padding:0;
+    font-family:"Bitcount Prop Single"; background:url('images/bg_home.jpg') center/cover no-repeat;
+    height:100vh; display:flex; justify-content:center; align-items:center;
+    flex-direction:column; color:white; text-shadow:0 0 10px black;
+}
+input {
+    padding:10px; background:#000; border:1px solid #444;
+    color:#fff; width:250px; margin-bottom:10px; font-size:1.2em; text-align:center;
+}
+button {
+    padding:12px 20px; margin:10px; background:#111; color:white; border:0;
+    cursor:pointer; font-size:18px;
+}
+button:hover { background:#555; }
+</style>
+</head>
+
+<body>
+    <h1 style="font-size:3em;">Case 3</h1>
+    <p>Mã liên lạc:</p>
+
+    <input id="code">
+    <button onclick="check()">Xác nhận</button>
+
+    <p id="result"></p>
+
+    <button onclick="location.href='hub.html'">Quay lại Hub</button>
+
+<script>
+function check(){
+    const v = document.getElementById("code").value;
+    document.getElementById("result").innerText =
+        v === "333" ? "Case 3 code đúng!" : "Sai mã";
+}
+</script>
 </body>
 </html>
