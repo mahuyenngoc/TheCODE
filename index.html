@@ -11,7 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
 
 <style>
-/* ----- CHUNG ----- */
 body {
     margin:0;
     padding:0;
@@ -70,10 +69,6 @@ button:hover { background:#555; }
 img { max-width:80%; height:auto; margin:20px 0; }
 
 .case-buttons { display:flex; flex-direction:column; gap:10px; }
-
-/* ADMIN PANEL overrides */
-#admin { background:#111; color:#eee; }
-#adminData { width:100%; height:300px; background:#000; color:#fff; }
 </style>
 </head>
 <body>
@@ -141,16 +136,6 @@ img { max-width:80%; height:auto; margin:20px 0; }
 <div id="slide3A" class="screen"><h1>Slide 3A</h1><p>Nội dung Slide 3A</p></div>
 <div id="slide3B" class="screen"><h1>Slide 3B</h1><p>Nội dung Slide 3B</p></div>
 
-<!-- ADMIN PANEL -->
-<div id="admin" class="screen">
-  <h1>ADMIN PANEL</h1>
-  <p>Đổi nội dung các trang (text và ảnh):</p>
-  <textarea id="adminData"></textarea>
-  <br>
-  <button onclick="saveAdmin()">Lưu</button>
-  <button onclick="go('home')">Về Trang chủ</button>
-</div>
-
 <script>
 // -------- PAGE SWITCH --------
 function go(id){
@@ -175,7 +160,7 @@ let data = {
  }
 };
 
-// Load saved admin edits
+// Load saved data
 if(localStorage.adminData){ data = JSON.parse(localStorage.adminData); }
 
 // -------- CODE CHECK --------
@@ -189,33 +174,6 @@ function checkCode(inputId){
    document.getElementById(resultId).innerText = "Sai mã";
  }
 }
-
-// -------- ADMIN PANEL --------
-function openAdmin(){
- go('admin');
- document.getElementById('adminData').value = JSON.stringify(data, null, 2);
-}
-
-function saveAdmin(){
- try{
-   const newData = JSON.parse(document.getElementById('adminData').value);
-   data = newData;
-   localStorage.adminData = JSON.stringify(data);
-   for(let i=1;i<=3;i++){
-     document.querySelector("#text"+i).innerText = data.pages["case"+i].text;
-     document.querySelector("#img"+i).src = data.pages["case"+i].img;
-   }
-   alert('Đã lưu');
- } catch(e){ alert('Sai format JSON'); }
-}
-
-// Secret admin hotkey: nhấn A+D+M
-let keys={};
-document.addEventListener('keydown', e=>{
- keys[e.key.toLowerCase()]=true;
- if(keys['a'] && keys['d'] && keys['m']) openAdmin();
-});
-document.addEventListener('keyup', e=>{ delete keys[e.key.toLowerCase()]; });
 </script>
 </body>
 </html>
