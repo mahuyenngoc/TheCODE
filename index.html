@@ -30,7 +30,6 @@ body {
     transform:translate(-50%, -50%);
     text-align:center;
 
-    /* --- HIỆU ỨNG FADE-IN --- */
     opacity:0;
     animation: fadeIn 1.2s ease forwards;
 }
@@ -38,6 +37,7 @@ body {
 /* OVERLAY */
 #overlay {
     display:none;
+    opacity:0;
     position:fixed;
     top:0; left:0;
     width:100vw; height:100vh;
@@ -45,7 +45,7 @@ body {
     backdrop-filter:blur(2px);
     z-index:10;
 
-    animation: fadeIn 0.4s ease forwards;
+    transition:opacity .35s ease;
 }
 
 /* POPUP PAGE */
@@ -67,13 +67,12 @@ body {
     color:white;
     text-align:center;
 
-    /* start hidden */
     opacity:0;
     scale:0.9;
     transition:0.35s ease;
 }
 
-/* POPUP ACTIVE ANIMATION */
+/* POPUP ACTIVE */
 .page.active {
     display:block !important;
     opacity:1;
@@ -92,12 +91,8 @@ button {
     font-size:18px;
     min-width:180px;
     transition:0.25s ease;
-
-    /* GLOW NHẸ */
     box-shadow:0 0 6px rgba(255,255,255,0.15);
 }
-
-/* BUTTON HOVER */
 button:hover { 
     background:#333;
     box-shadow:0 0 12px rgba(255,255,255,0.35);
@@ -112,12 +107,10 @@ input {
     width:240px;
     font-size:1.1em;
     margin-top:10px;
-
-    /* glow input */
     box-shadow:0 0 10px rgba(255,255,255,0.1) inset;
 }
 
-/* KEYFRAMES */
+/* ANIMATION */
 @keyframes fadeIn {
     from { opacity:0; transform:translate(-50%, -55%); }
     to   { opacity:1; transform:translate(-50%, -50%); }
@@ -150,11 +143,9 @@ input {
 <div id="case1" class="page">
     <h1>Case 1</h1>
     <p>Mã liên hệ Cyphers:</p>
-
     <input id="c1">
     <button onclick="check(1)">Xác nhận</button>
     <p id="r1"></p>
-
     <button onclick="openPage('hub')">Back to Hub</button>
 </div>
 
@@ -162,11 +153,9 @@ input {
 <div id="case2" class="page">
     <h1>Case 2</h1>
     <p>Mã liên hệ Cyphers:</p>
-
     <input id="c2">
     <button onclick="check(2)">Xác nhận</button>
     <p id="r2"></p>
-
     <button onclick="openPage('hub')">Back to Hub</button>
 </div>
 
@@ -174,23 +163,30 @@ input {
 <div id="case3" class="page">
     <h1>Case 3</h1>
     <p>Mã liên hệ Cyphers:</p>
-
     <input id="c3">
     <button onclick="check(3)">Xác nhận</button>
     <p id="r3"></p>
-
     <button onclick="openPage('hub')">Back to Hub</button>
 </div>
 
 <script>
 function closePage(){
-    document.getElementById("overlay").style.display="none";
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+
+    const overlay = document.getElementById("overlay");
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+        overlay.style.display = "none";
+    }, 300);
 }
 
 function openPage(id){
-    closePage();
-    document.getElementById("overlay").style.display="block";
+    const overlay = document.getElementById("overlay");
+
+    overlay.style.display = "block";
+    setTimeout(() => overlay.style.opacity = "1", 10);
+
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
     document.getElementById(id).classList.add("active");
 }
 
