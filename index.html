@@ -13,7 +13,7 @@ body {
     margin:0;
     padding:0;
     font-family:"Bitcount Prop Single", system-ui;
-    background:url('images/bg_home.jpg') center/cover no-repeat;
+    background:url('images/bg_home.jpg') center/cover no-repeat fixed;
     height:100vh;
     display:flex;
     justify-content:center;
@@ -21,23 +21,25 @@ body {
     flex-direction:column;
     color:white;
     text-shadow:0 0 10px black;
+    overflow:hidden;
 }
 
-/* POPUP */
-.popup {
+/* PAGE (no more slideshow) */
+.page {
     display:none;
-    position:fixed;
+    position:absolute;
     top:0; left:0;
-    width:100vw; height:100vh;
-    background:url('images/bg_home.jpg') center/cover no-repeat;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter: blur(3px);
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    color:white;
-    backdrop-filter: blur(3px);
 }
-.active { display:flex !important; }
+.page.active {
+    display:flex;
+}
 
 button {
     padding:12px 20px;
@@ -67,26 +69,26 @@ input {
 <body>
 
 <!-- HOME -->
-<div id="home" class="popup active">
+<div id="home" class="page active">
     <h1 style="font-size:4em;">The CODE</h1>
     <p style="font-size:20px;">Welcome back, Decoder.</p>
-    <button onclick="openPopup('hub')">Tiến hành vụ án</button>
+    <button onclick="openPage('hub')">Tiến hành vụ án</button>
 </div>
 
 <!-- HUB -->
-<div id="hub" class="popup">
+<div id="hub" class="page">
     <h1 style="font-size:3em;">Case Hub</h1>
     <p>Chọn Case muốn thực hiện:</p>
 
-    <button onclick="openPopup('case1')">Case 1</button>
-    <button onclick="openPopup('case2')">Case 2</button>
-    <button onclick="openPopup('case3')">Case 3</button>
+    <button onclick="openPage('case1')">Case 1</button>
+    <button onclick="openPage('case2')">Case 2</button>
+    <button onclick="openPage('case3')">Case 3</button>
 
-    <button onclick="openPopup('home')">Quay lại Trang chủ</button>
+    <button onclick="openPage('home')">Quay lại Trang chủ</button>
 </div>
 
 <!-- CASE 1 -->
-<div id="case1" class="popup">
+<div id="case1" class="page">
     <h1 style="font-size:3em;">Case 1</h1>
     <p>Mã liên lạc:</p>
 
@@ -94,11 +96,11 @@ input {
     <button onclick="check(1)">Xác nhận</button>
     <p id="result1"></p>
 
-    <button onclick="openPopup('hub')">Quay lại Hub</button>
+    <button onclick="openPage('hub')">Quay lại Hub</button>
 </div>
 
 <!-- CASE 2 -->
-<div id="case2" class="popup">
+<div id="case2" class="page">
     <h1 style="font-size:3em;">Case 2</h1>
     <p>Mã liên lạc:</p>
 
@@ -106,11 +108,11 @@ input {
     <button onclick="check(2)">Xác nhận</button>
     <p id="result2"></p>
 
-    <button onclick="openPopup('hub')">Quay lại Hub</button>
+    <button onclick="openPage('hub')">Quay lại Hub</button>
 </div>
 
 <!-- CASE 3 -->
-<div id="case3" class="popup">
+<div id="case3" class="page">
     <h1 style="font-size:3em;">Case 3</h1>
     <p>Mã liên lạc:</p>
 
@@ -118,12 +120,12 @@ input {
     <button onclick="check(3)">Xác nhận</button>
     <p id="result3"></p>
 
-    <button onclick="openPopup('hub')">Quay lại Hub</button>
+    <button onclick="openPage('hub')">Quay lại Hub</button>
 </div>
 
 <script>
-function openPopup(id){
-    document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+function openPage(id){
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
 }
 
