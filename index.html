@@ -1,75 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The CODE</title>
 
-<!-- Font Bitcount Prop Single -->
+<!-- FONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
 
 <style>
-/* ----- CHUNG ----- */
-body {
-    margin:0;
-    padding:0;
-    font-family: "Bitcount Prop Single", system-ui;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings: "slnt" 0, "CRSV" 0.5, "ELSH" 0, "ELXP" 0;
+/* FONT TOÀN TRANG */
+body, html {
+  margin:0; padding:0;
+  height:100%;
+  font-family: 'Bitcount Prop Single', system-ui;
+  background: none; /* sẽ dùng div #bg */
+  color:#000; /* chữ ngoài ô đen */
 }
 
-/* ----- SCREEN ----- */
-.screen {
-    display:none;
-    width:100vw;
-    height:100vh;
-    background-image:url('images/bg_home.jpg');
-    background-size: cover;
-    background-position: center;
-    color:#000;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-    box-sizing:border-box;
+/* NỀN */
+#bg {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1;
+  background-image: url('bg_home.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.active { display:flex; }
 
-h1 { font-size:4em; margin-bottom:0.2em; }
-p { font-size:1.5em; margin:0.5em 0; }
-
-input {
-    padding:10px;
-    background:#000;
-    border:1px solid #444;
-    color:#fff;
-    width:250px;
-    margin-bottom:10px;
-    font-size:1.2em;
-    text-align:center;
+/* POPUP */
+.popup {
+  display:none;
+  position: fixed;
+  top:50%; left:50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.85);
+  padding:40px;
+  border-radius:15px;
+  text-align:center;
+  width:80%;
+  max-width:500px;
 }
+
+/* HIỂN THỊ POPUP ACTIVE */
+.popup.active { display:block; }
+
+/* TIÊU ĐỀ TO */
+.popup h1 { font-size:2.5em; margin-bottom:20px; }
+
+/* BUTTON */
 button {
-    padding:12px 20px;
-    margin:10px 0;
-    cursor:pointer;
-    border:0;
-    background:#222;
-    color:#eee;
-    display:block;
-    font-size:1.2em;
-    min-width:200px;
+  padding:10px 18px;
+  margin:10px 0;
+  cursor:pointer;
+  border:0;
+  background:#222;
+  color:#fff;
+  width:200px;
 }
-button:hover { background:#555; }
 
-img { max-width:80%; height:auto; margin:20px 0; }
-
-.case-buttons { display:flex; flex-direction:column; gap:10px; }
+/* INPUT */
+input {
+  padding:8px;
+  background:#111;
+  border:1px solid #444;
+  color:#fff;
+  width:200px;
+  margin-bottom:10px;
+  text-align:center;
+}
+</style>
+</head>
+<body>
 
 <!-- NỀN -->
 <div id="bg"></div>
