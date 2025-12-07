@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>The CODE</title>
+<title>Case 1 — C</title>
 
 <!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,15 +18,19 @@ body {
     background:url('images/bg_home.jpg') center/cover no-repeat fixed;
     height:100vh;
     overflow:hidden;
-    color:black;
+    color:white;
     text-align:center;
     position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 
-/* button */
+/* BUTTON */
 button {
     padding:12px 20px;
-    margin:10px;
+    margin-top:20px;
     background:#000;
     border:1px solid #444;
     border-radius:6px;
@@ -42,35 +46,11 @@ button:hover {
     box-shadow:0 6px 18px rgba(0,0,0,0.6), 0 0 18px rgba(0,255,255,0.08);
 }
 
-/* overlay */
-#overlay {
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.4);
-    backdrop-filter:blur(2px);
-    z-index:10;
-}
+/* REMOVE POPUP + OVERLAY */
+#overlay { display:none; }
+.page { display:none; }
 
-/* popup */
-.page {
-    display:block;
-    position:fixed;
-    top:50%; left:50%;
-    transform:translate(-50%, -50%);
-    width:80vw;
-    max-width:520px;
-    background:rgba(0,0,0,0.55);
-    backdrop-filter:blur(8px);
-    border-radius:12px;
-    border:1px solid rgba(0,255,255,0.12);
-    padding:34px;
-    box-shadow:0 0 30px rgba(0,0,0,0.6);
-    z-index:20;
-    color:white;
-    text-align:center;
-}
-
-/* scanlines */
+/* SCANLINES */
 body::after {
     content:"";
     position:fixed;
@@ -90,14 +70,10 @@ body::after {
 
 <body>
 
-<div id="overlay"></div>
-
-<div class="page">
-    <h1 style="font-family:Montserrat; font-size:3rem; margin-top:0;">Case 1 — C</h1>
-    <p>Welcome to Case 1_C page.</p>
+    <h1 style="font-family:Montserrat; font-size:3rem; margin:0;">Case 1 — C</h1>
+    <p style="font-size:1.3rem; margin-top:10px;">Welcome to Case 1_C page.</p>
 
     <button onclick="openHub()">Back to Hub</button>
-</div>
 
 <script>
 function openHub(){
