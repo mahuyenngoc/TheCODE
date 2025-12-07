@@ -2,27 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Case 1_C</title>
+<title>The CODE</title>
 
 <!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Primary (buttons / body / inputs) -->
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
+<!-- Title font (changeable) -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
+/* NỀN CHÍNH */
 body {
-    margin:0; padding:0;
-    font-family:"Bitcount Prop Single", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-    background:url('../images/bg_home.jpg') center/cover no-repeat fixed;
+    margin:0;
+    padding:0;
+    /* body dùng Bitcount (the font you wanted) */
+    font-family:"Bitcount Prop Single", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:url('images/bg_home.jpg') center/cover no-repeat fixed;
     height:100vh;
     overflow:hidden;
-    color:white;
+    color:black;
     text-align:center;
     position:relative;
 }
-h1, h2 { margin:0; font-weight:700; }
-h1.title-main { font-family: "Montserrat"; font-size:5rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; }
 
 button {
     padding:12px 20px;
