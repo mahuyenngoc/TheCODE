@@ -7,18 +7,14 @@
 <!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Primary (buttons / body / inputs) -->
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
-<!-- Title font (changeable) -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
-/* NỀN CHÍNH */
 body {
     margin:0;
     padding:0;
-    /* body dùng Bitcount (the font you wanted) */
-    font-family:"Bitcount Prop Single", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    font-family:"Bitcount Prop Single", system-ui;
     background:url('images/bg_home.jpg') center/cover no-repeat fixed;
     height:100vh;
     overflow:hidden;
@@ -27,6 +23,7 @@ body {
     position:relative;
 }
 
+/* button */
 button {
     padding:12px 20px;
     margin:10px;
@@ -40,20 +37,28 @@ button {
     transition:all .22s ease;
     box-shadow:0 0 8px rgba(0,0,0,0.6), inset 0 0 6px rgba(255,255,255,0.03);
 }
-button:hover { background:#222; box-shadow:0 6px 18px rgba(0,0,0,0.6), 0 0 18px rgba(0,255,255,0.08); }
+button:hover {
+    background:#222;
+    box-shadow:0 6px 18px rgba(0,0,0,0.6), 0 0 18px rgba(0,255,255,0.08);
+}
 
-/* Overlay & popup style */
+/* overlay */
 #overlay {
-    position:fixed; inset:0;
+    position:fixed;
+    inset:0;
     background:rgba(0,0,0,0.4);
     backdrop-filter:blur(2px);
     z-index:10;
 }
+
+/* popup */
 .page {
     display:block;
-    position:fixed; top:50%; left:50%;
+    position:fixed;
+    top:50%; left:50%;
     transform:translate(-50%, -50%);
-    width:80vw; max-width:520px;
+    width:80vw;
+    max-width:520px;
     background:rgba(0,0,0,0.55);
     backdrop-filter:blur(8px);
     border-radius:12px;
@@ -65,9 +70,11 @@ button:hover { background:#222; box-shadow:0 6px 18px rgba(0,0,0,0.6), 0 0 18px 
     text-align:center;
 }
 
-/* subtle scanlines */
+/* scanlines */
 body::after {
-    content:""; position:fixed; inset:0;
+    content:"";
+    position:fixed;
+    inset:0;
     pointer-events:none;
     background: repeating-linear-gradient(
         to bottom,
@@ -75,7 +82,8 @@ body::after {
         rgba(255,255,255,0.02) 1px,
         transparent 2px
     );
-    z-index:5; mix-blend-mode:overlay;
+    z-index:5;
+    mix-blend-mode:overlay;
 }
 </style>
 </head>
@@ -85,15 +93,15 @@ body::after {
 <div id="overlay"></div>
 
 <div class="page">
-    <h1 class="title-main">Case 1_C</h1>
+    <h1 style="font-family:Montserrat; font-size:3rem; margin-top:0;">Case 1 — C</h1>
     <p>Welcome to Case 1_C page.</p>
+
     <button onclick="openHub()">Back to Hub</button>
 </div>
 
 <script>
 function openHub(){
-    // quay lại index.html và mở hub
-    window.location.href = '../index.html#hub';
+    window.location.href = 'index.html#hub';
 }
 </script>
 
